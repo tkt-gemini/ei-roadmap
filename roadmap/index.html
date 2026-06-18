@@ -1,0 +1,604 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AI-first Embodied Robot Learning Roadmap v8.9.0</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body class="view-overview">
+<div class="container">
+
+  <!-- ══ VIEW MODE TOP BAR ══ -->
+  <div class="phase-nav" aria-label="View mode controls">
+    <div class="topbar-title"><strong>View Mode</strong>Chọn lớp thông tin phù hợp để đỡ bị ngợp.</div>
+    <div class="view-buttons">
+      <button type="button" data-view="overview" class="active">Overview</button>
+      <button type="button" data-view="build">Build Path</button>
+      <button type="button" data-view="math">Math</button>
+      <button type="button" data-view="resources">Resources</button>
+      <button type="button" data-view="all">Full</button>
+    </div>
+  </div>
+
+  <!-- ══ HEADER ══ -->
+  <div class="page-header">
+    <div class="kicker">Roadmap v8.9.0 · Roadmap OS + Visual Map + Checklist · Phase 2C mở rộng Audio-Language Fusion</div>
+    <h1>AI-first Embodied Robot Learning Roadmap</h1>
+    <p>Roadmap này lấy Brain (bộ não AI) làm trục chính — bao gồm Vision, Language, Generative Models, Policy Learning và World Models — rồi nối vào body (robotics system) đúng lúc cần. Mục tiêu: hiểu, build, debug và đánh giá một hệ thống Embodied AI nhỏ trong đó brain nhận observation đa phương thức, suy luận, xuất action, và học từ kinh nghiệm.</p>
+    <div class="time-summary">
+      <div class="time-dot"></div>
+      <span><strong>Tổng thời gian ước tính:</strong> Phase 0–5 (Core) khoảng <strong>2–2.5 năm</strong> · Phase 6–7 (Advanced) thêm <strong>6–12 tháng</strong> · Tính theo 15–20 giờ/tuần</span>
+    </div>
+  </div>
+
+  <!-- ══ ROADMAP OS OVERVIEW ══ -->
+  <section class="roadmap-os" aria-label="Roadmap overview">
+    <div class="os-panel">
+      <div class="os-eyebrow">Roadmap Compass</div>
+      <h2>Đọc từ bản đồ trước, mở chi tiết sau.</h2>
+      <p>Roadmap này được tổ chức theo 3 tầng: overview để định hướng, phase card để biết cần build gì, và drawer chi tiết cho tài liệu / checkpoint / toán khi cần đào sâu.</p>
+      <div class="compass-grid">
+        <div class="compass-card"><strong>Core Output</strong><span>Demo robot-learning trong simulation có observation đa phương thức, policy inference, action output, logs và failure analysis.</span></div>
+        <div class="compass-card"><strong>Pace</strong><span>Phase 0–5 khoảng 2–2.5 năm. Phase 6–7 thêm 6–12 tháng. Tính theo 15–20 giờ/tuần.</span></div>
+        <div class="compass-card"><strong>Rule</strong><span>Mỗi phase phải tạo artifact chạy được, đo được hoặc debug được. Course không được xem là output cuối.</span></div>
+      </div>
+    </div>
+
+    <div class="timeline-panel">
+      <div class="os-eyebrow">Visual Roadmap Map</div>
+      <div class="roadmap-map" aria-label="Visual roadmap map with branches">
+        <svg class="roadmap-svg-map" viewBox="0 0 1160 340" role="img" aria-labelledby="roadmapMapTitle roadmapMapDesc">
+          <title id="roadmapMapTitle">Embodied AI roadmap visual map</title>
+          <desc id="roadmapMapDesc">A roadmap with a core spine from Phase 0 to Phase 5, a parallel branch for Phase 2A Vision and Phase 2B Language that merges at Phase 2C (Multimodal Fusion: Vision-Language + Audio-Language), and an advanced branch from Phase 5 to Phase 6 and Phase 7.</desc>
+
+          <defs>
+            <filter id="nodeShadow" x="-20%" y="-25%" width="140%" height="150%">
+              <feDropShadow dx="0" dy="8" stdDeviation="8" flood-color="#231c0f" flood-opacity="0.08"/>
+            </filter>
+          </defs>
+
+          <text class="svg-map-label" x="192" y="238">CORE SPINE</text>
+          <text class="svg-map-label branch" x="470" y="34" text-anchor="middle">PARALLEL BRANCH</text>
+          <text class="svg-map-label research" x="1020" y="34" text-anchor="middle">ADVANCED PATH</text>
+
+          <path class="svg-road core" d="M 120 170 L 145 170" />
+          <path class="svg-road core" d="M 245 170 L 270 170" />
+          <path class="svg-road branch" d="M 370 170 C 398 170 390 85 420 85" />
+          <path class="svg-road branch" d="M 370 170 C 398 170 390 255 420 255" />
+          <path class="svg-road branch" d="M 520 85 C 555 85 540 170 570 170" />
+          <path class="svg-road branch" d="M 520 255 C 555 255 540 170 570 170" />
+          <path class="svg-road core" d="M 670 170 L 700 170" />
+          <path class="svg-road core" d="M 810 170 L 830 170" />
+          <path class="svg-road system" d="M 940 170 L 960 170" />
+          <path class="svg-road research" d="M 1010 140 C 1005 120 985 116 960 112" />
+          <path class="svg-road research" d="M 1005 85 L 1025 85" />
+
+          <a href="#ph0" class="svg-node core"><rect x="20" y="143" width="100" height="54" rx="15"/><text x="36" y="164">Phase 0</text><text class="sub" x="36" y="183">Setup</text></a>
+          <a href="#ph05" class="svg-node core"><rect x="145" y="143" width="100" height="54" rx="15"/><text x="163" y="164">0.5</text><text class="sub" x="163" y="183">Quick Win</text></a>
+          <a href="#ph1" class="svg-node core"><rect x="270" y="143" width="100" height="54" rx="15"/><text x="287" y="164">Phase 1</text><text class="sub" x="287" y="183">DL Math</text></a>
+
+          <a href="#ph2a" class="svg-node branch"><rect x="420" y="58" width="100" height="54" rx="15"/><text x="437" y="79">Phase 2A</text><text class="sub" x="437" y="98">Vision</text></a>
+          <a href="#ph2b" class="svg-node branch"><rect x="420" y="228" width="100" height="54" rx="15"/><text x="437" y="249">Phase 2B</text><text class="sub" x="437" y="268">Language</text></a>
+          <a href="#ph2c" class="svg-node branch merge"><rect x="570" y="143" width="100" height="54" rx="15"/><text x="587" y="164">Phase 2C</text><text class="sub" x="587" y="183">VL+Audio</text></a>
+
+          <a href="#ph3" class="svg-node core"><rect x="700" y="143" width="110" height="54" rx="15"/><text x="717" y="164">Phase 3</text><text class="sub" x="717" y="183">Gen Policy</text></a>
+          <a href="#ph4" class="svg-node core"><rect x="830" y="143" width="110" height="54" rx="15"/><text x="847" y="164">Phase 4</text><text class="sub" x="847" y="183">Robot Learn</text></a>
+          <a href="#ph5" class="svg-node system"><rect x="960" y="143" width="100" height="54" rx="15"/><text x="977" y="164">Phase 5</text><text class="sub" x="977" y="183">System</text></a>
+
+          <a href="#ph6" class="svg-node research"><rect x="905" y="58" width="100" height="54" rx="15"/><text x="922" y="79">Phase 6</text><text class="sub" x="922" y="98">Research</text></a>
+          <a href="#ph7" class="svg-node research"><rect x="1025" y="58" width="100" height="54" rx="15"/><text x="1042" y="79">Phase 7</text><text class="sub" x="1042" y="98">Portfolio</text></a>
+
+          <text class="svg-note" x="395" y="316">2A và 2B học song song, rồi nhập tại 2C (VL Fusion + Audio-Language) trước khi sang generative policy.</text>
+        </svg>
+      </div>
+      <div class="map-legend"><span>Core spine: học bắt buộc</span><span>2A/2B: học song song</span><span>2C: điểm nhập nhánh</span><span>6–7: research path</span></div>
+      <div class="timeline-note"><strong>Gợi ý đọc:</strong> bắt đầu từ map, click node để nhảy đến phase. Khi đang học thật, chuyển sang Build Path; Math và Resources chỉ mở đúng lúc cần.</div>
+    </div>
+  </section>
+
+  <details class="read-first-block">
+    <summary>Read this first — yêu cầu đầu vào, định vị, nguyên tắc học <span class="toggle-icon">▶</span></summary>
+    <div class="read-first-grid">
+      <div class="read-first-card">
+        <h3>Yêu cầu đầu vào</h3>
+        Python cơ bản, quen terminal, toán phổ thông. Nếu toán yếu: trước Phase 1, học qua <a href="https://www.khanacademy.org/math/linear-algebra" target="_blank">Khan Academy Linear Algebra</a> và <a href="https://www.khanacademy.org/math/statistics-probability" target="_blank">Statistics</a> trong 4–6 tuần. Phase 3 cần calculus đa biến.
+      </div>
+      <div class="read-first-card">
+        <h3>Định vị</h3>
+        Mục tiêu là xây năng lực AI/Brain cho Embodied AI: robot biết nhìn, nghe, nói, suy luận, hành động và học. Không phải roadmap Robotics Engineer, NLP thuần hay CV thuần.
+      </div>
+      <div class="read-first-card">
+        <h3>Nguyên tắc</h3>
+        Brain-centric, build-path first, học toán gốc rễ khi nó quyết định khả năng hiểu model: KL, ELBO, Score Matching, InfoNCE, Attention, Policy Gradient.
+      </div>
+      <div class="read-first-card">
+        <h3>Khi bị mắc</h3>
+        Overfit 1 batch trước, tăng data dần. Nếu loss không giảm: kiểm tra data pipeline, learning rate, gradient norm. Concept xuất hiện ≥3 lần thì đào sâu; xuất hiện 1 lần thì hiểu đủ dùng rồi đi tiếp.
+      </div>
+      <div class="read-first-card full">
+        <h3>Chuỗi kiểm tra Brain → Body</h3>
+        camera/sim observation + language instruction → preprocessing/calibration/sync → vision encoder + language encoder → multimodal fusion → policy model → action clipping/rate limit/controller → simulator/robot → rollout log → success rate/latency/crash rate → failure analysis. Phase 2A và 2B có thể học song song; Phase 2C học sau cả hai.
+      </div>
+    </div>
+  </details>
+
+  <!-- ══ QUICK REFERENCE TABLES (pinned, collapsible) ══ -->
+  <div class="section-label">Quick Reference</div>
+
+  <details class="summary-block" id="deliverables">
+    <summary>📋 Unified Deliverables — xem nhanh pass criteria tất cả phase <span class="toggle-icon">▶</span></summary>
+    <div class="summary-block-body">
+      <table class="section-table" style="border-radius:0;border:none">
+        <thead><tr><th>Phase</th><th>Output bắt buộc</th><th>Không được tính là hoàn thành nếu thiếu</th></tr></thead>
+        <tbody>
+          <tr><td><strong>0</strong></td><td>Repo template + config + logging + checkpoint</td><td>Code chỉ chạy trong notebook cá nhân</td></tr>
+          <tr><td><strong>0.5</strong></td><td>2 demo (RL + robot sim) chạy được + ghi chép observation/action/reward</td><td>Không hiểu sơ bộ pipeline obs → policy → action → env</td></tr>
+          <tr><td><strong>1</strong></td><td>Training loop tự viết + optimizer ablation + <strong>KL/entropy bằng tay</strong></td><td>Không giải thích được forward/backward, loss function</td></tr>
+          <tr><td><strong>2A</strong></td><td>Vision model fine-tuned + encoder comparison report</td><td>Chỉ chạy pretrained model không hiểu architecture</td></tr>
+          <tr><td><strong>2B</strong></td><td>nanoGPT trained + LLM fine-tuned + tokenizer report</td><td>Không giải thích được causal attention và autoregressive</td></tr>
+          <tr><td><strong>2C</strong></td><td>CLIP/VLM experiment + Vision vs Vision+Language report</td><td>Không hiểu contrastive learning và cross-attention</td></tr>
+          <tr><td><strong>3</strong></td><td>VAE + DDPM implemented + <strong>ELBO derivation</strong> + BC baseline</td><td>Chỉ dùng library mà không hiểu loss function toán học</td></tr>
+          <tr><td><strong>4</strong></td><td>BC vs ACT vs Diffusion Policy comparison + data collection pipeline + sim-to-real ablation</td><td>Nhảy vào model phức tạp mà không có baseline và data pipeline</td></tr>
+          <tr><td><strong>5</strong></td><td>Closed-loop perception-policy-action system + logs + latency</td><td>ROS2 demo rời rạc, không có policy loop/evaluation</td></tr>
+          <tr><td><strong>6</strong></td><td>VLA hoặc World Model experiment + language-conditioned demo</td><td>Chỉ đọc paper mà không trace code hoặc chạy experiment</td></tr>
+          <tr><td><strong>7</strong></td><td>Polished repo + demo video + report + reproducibility note</td><td>Project không chạy lại được từ README</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </details>
+
+  <details class="summary-block" id="math-table">
+    <summary>🌳 Toán "Gốc Rễ" vs "Cành Lá" — xem nhanh mức độ học từng topic <span class="toggle-icon">▶</span></summary>
+    <div class="summary-block-body">
+      <table class="section-table" style="border-radius:0;border:none">
+        <thead><tr><th>Chủ đề</th><th>Phân loại</th><th>Mức độ</th><th>Học ở Phase</th></tr></thead>
+        <tbody>
+          <tr><td>KL Divergence, Entropy, Cross-Entropy</td><td>🌳 Gốc rễ</td><td>Derivation + áp dụng</td><td>Phase 1</td></tr>
+          <tr><td>ELBO, Variational Inference</td><td>🌳 Gốc rễ</td><td>Derivation + áp dụng</td><td>Phase 3</td></tr>
+          <tr><td>Score Matching, Denoising Objective</td><td>🌳 Gốc rễ</td><td>Derivation + áp dụng</td><td>Phase 3</td></tr>
+          <tr><td>Flow Matching, Optimal Transport</td><td>🌳 Gốc rễ</td><td>Derivation + áp dụng</td><td>Phase 3</td></tr>
+          <tr><td>InfoNCE, Contrastive Learning</td><td>🌳 Gốc rễ</td><td>Derivation + áp dụng</td><td>Phase 2C</td></tr>
+          <tr><td>Attention Mechanism</td><td>🌳 Gốc rễ</td><td>Implement + hiểu bản chất</td><td>Phase 2A/2B</td></tr>
+          <tr><td>Policy Gradient (REINFORCE, PPO)</td><td>🌳 Gốc rễ</td><td>Derivation + implement</td><td>Phase 3</td></tr>
+          <tr><td>Backpropagation</td><td>🌳 Gốc rễ</td><td>Implement from scratch</td><td>Phase 1</td></tr>
+          <tr><td>CNN architecture details</td><td>🍃 Cành lá</td><td>Hiểu đủ dùng</td><td>Phase 2A</td></tr>
+          <tr><td>Optimizer internals (Adam, AdamW)</td><td>🍃 Cành lá</td><td>Biết dùng + tune</td><td>Phase 1</td></tr>
+          <tr><td>Data augmentation techniques</td><td>🍃 Cành lá</td><td>Biết dùng + ablation</td><td>Phase 2A</td></tr>
+          <tr><td>ROS2, URDF, tf2</td><td>🍃 Cành lá</td><td>Kỹ năng hệ thống</td><td>Phase 5</td></tr>
+          <tr><td>Camera calibration</td><td>🍃 Cành lá</td><td>Biết quy trình</td><td>Phase 2A/5</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </details>
+
+  <details class="summary-block">
+    <summary>🗺️ Skill Layer Map — overview tất cả layer <span class="toggle-icon">▶</span></summary>
+    <div class="summary-block-body">
+      <table class="section-table" style="border-radius:0;border:none">
+        <thead><tr><th>Layer</th><th>Vai trò</th><th>Chủ đề chính</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Foundations</strong></td><td>Nền workflow và toán gốc rễ.</td><td>Python, Linux, Git, PyTorch, linear algebra, probability, KL divergence, entropy, information theory.</td></tr>
+          <tr><td><strong>Vision</strong></td><td>Mắt của robot.</td><td>CNN, ViT, CLIP, camera intrinsic/extrinsic, RGB-D, calibration.</td></tr>
+          <tr><td><strong>Language</strong></td><td>Tai và miệng của robot.</td><td>Tokenization, autoregressive LM, Transformer causal, instruction tuning, RLHF concept.</td></tr>
+          <tr><td><strong>Multimodal</strong></td><td>Nối mắt + tai + miệng.</td><td>CLIP deep dive, InfoNCE, VLM (LLaVA, Flamingo), cross-attention.</td></tr>
+          <tr><td><strong>Generative Models</strong></td><td>Nền cho mọi policy nâng cao.</td><td>VAE/ELBO, DDPM/score matching, Flow Matching.</td></tr>
+          <tr><td><strong>Policy & Decision</strong></td><td>Não ra quyết định.</td><td>MDP, BC, DAgger, policy gradient, PPO, action space, distribution shift.</td></tr>
+          <tr><td><strong>Data Curation</strong></td><td>Nhiên liệu cho brain.</td><td>Teleoperation, demonstration collection, data filtering, zarr/HDF5/LeRobot formats.</td></tr>
+          <tr><td><strong>Robotics System</strong></td><td>Hệ thần kinh + cơ bắp.</td><td>ROS2, URDF, tf2, PID, control loop, logging, safety, sim-to-real.</td></tr>
+          <tr><td><strong>World Models & VLA</strong></td><td>Trí tưởng tượng + ngôn ngữ hành động.</td><td>Video prediction, Dreamer, JEPA, VLA architecture, language-conditioned policy.</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </details>
+
+  <!-- ═══════════════════════════════════════════════ -->
+  <div class="view-overview-note">Overview chỉ hiện phase, thời lượng và output chính. Bấm vào phase hoặc chuyển Build Path để xem chi tiết.</div>
+  <div class="checklist-toolbar" aria-label="Checklist progress controls">
+    <div class="checklist-toolbar-main">
+      <span id="progressSummary" class="progress-summary">0/0 hoàn thiện</span>
+      <div style="display:flex;gap:6px;flex-wrap:wrap">
+        <button type="button" id="completedOnlyToggle" class="progress-toggle" aria-pressed="false">Chỉ hiện đã hoàn thiện</button>
+        <button type="button" id="expandAllPhases" class="progress-toggle">Mở tất cả phase</button>
+        <button type="button" id="collapseAllPhases" class="progress-toggle">Thu gọn tất cả</button>
+      </div>
+    </div>
+    <details class="progress-drawer">
+      <summary>Quản lý file tiến độ <span class="toggle-icon">▶</span></summary>
+      <div class="progress-drawer-body">
+        <p>Phần này chỉ dùng khi muốn giữ checklist giữa các lần mở. Không dùng localStorage.</p>
+        <div class="progress-drawer-actions">
+          <button type="button" id="loadProgressButton" class="progress-toggle">Nạp file tiến độ</button>
+          <button type="button" id="saveProgressButton" class="progress-toggle">Xuất file tiến độ</button>
+          <input type="file" id="progressFileInput" class="progress-file-input" accept=".txt,text/plain,application/json" />
+          <span id="progressFileStatus" class="progress-status" aria-live="polite"></span>
+        </div>
+      </div>
+    </details>
+  </div>
+  <div class="section-label phase-detail-label">Phase Detail Cards</div>
+
+  <!-- ══ PHASE 0 ══ -->
+  <details class="phase ph0" id="ph0">
+    <summary class="phase-head">
+      <span class="phase-badge">Phase 0</span>
+      <span class="phase-title">Setup &amp; Workflow</span>
+      <span class="phase-meta">2 tuần</span>
+      <span class="phase-output">Output: repo template + config + logging + checkpoint.</span>
+      <span class="toggle-icon">▶</span>
+    </summary>
+    <div class="phase-body">
+      <div class="project-hero"><div class="project-icon">🔧</div><div><div class="project-label">Goal</div><div class="project-name">Có workflow cố định cho mọi experiment</div><div class="project-desc">Chuẩn hóa repo, environment, config, logging, checkpoint và report để các phase sau không biến thành notebook rời rạc.</div></div></div>
+      <div class="col-grid">
+        <div class="col"><div class="col-title">Skills</div><ul class="skill-list"><li>Linux terminal, shell script cơ bản, file system, permissions</li><li>Git workflow: branch, commit, issue, pull request</li><li>Python environment: venv/conda, pip, requirements.txt</li><li>PyTorch tensor, GPU check, training loop nhỏ</li><li>Config file, random seed, checkpoint, logging</li></ul></div>
+        <div class="col"><div class="col-title">Tools</div><ul class="skill-list"><li>Ubuntu hoặc WSL2</li><li>GitHub</li><li>Python 3.11+</li><li>PyTorch</li><li>TensorBoard hoặc Weights &amp; Biases</li></ul></div>
+        <div class="col"><div class="col-title">Pass Criteria</div><ul class="skill-list"><li>Template repo public</li><li>MNIST/CIFAR training loop chạy lại được từ config</li><li>Checkpoint + log + metric table hoạt động</li><li>Report template có method, result, ablation, limitation</li></ul></div>
+      </div>
+      <details class="phase-resources">
+        <summary class="resources-toggle"><span class="col-title">Tài liệu</span><span class="res-count">2 nguồn</span><span class="toggle-icon">▶</span></summary>
+        <div class="resources-body">
+          <div class="course-item"><span class="course-name">MIT Missing Semester — shell, Git, scripting</span><a class="course-link" href="https://www.youtube.com/playlist?list=PLyzOVJj3bHQuloKGG59rS43e29ro7I57J" target="_blank">YouTube playlist</a><span class="course-note">Core source cho terminal và workflow.</span></div>
+          <div class="course-item"><span class="course-name">Corey Schafer: Python Virtual Environments</span><a class="course-link" href="https://www.youtube.com/watch?v=APOPm01BVrk" target="_blank">YouTube</a><span class="course-note">venv, pip, requirements.txt.</span></div>
+        </div>
+      </details>
+      <div class="ratio-row"><span class="ratio-badge ratio-ai">Core Build Path</span><span class="ratio-badge ratio-ai">Laptop cá nhân</span></div>
+    </div>
+  </details>
+
+  <!-- ══ PHASE 0.5 ══ -->
+  <details class="phase ph05" id="ph05">
+    <summary class="phase-head">
+      <span class="phase-badge">Phase 0.5</span>
+      <span class="phase-title">Quick Win Demo — Xây Motivation</span>
+      <span class="phase-meta">1 tuần</span>
+      <span class="phase-output">Output: 2 demo chạy được + ghi chép observation/action/reward.</span>
+      <span class="toggle-icon">▶</span>
+    </summary>
+    <div class="phase-body">
+      <div class="project-hero"><div class="project-icon">🚀</div><div><div class="project-label">Goal</div><div class="project-name">Chạy 1 demo end-to-end đơn giản để thấy bức tranh toàn cảnh</div><div class="project-desc">Phase 1 kéo dài 4–5 tháng toán nặng — dễ mất motivation nếu chưa thấy robot nào hoạt động. Phase này cho bạn chạy 1 demo RL đơn giản và 1 demo robot sim để biết mục tiêu cuối cùng trông như thế nào.</div></div></div>
+      <div class="col-grid">
+        <div class="col"><div class="col-title">Làm gì</div><ul class="skill-list"><li>Chạy CartPole hoặc LunarLander với Gymnasium + random/pretrained agent</li><li>Chạy 1 demo FetchReach hoặc Push-T với pretrained policy (LeRobot hoặc Diffusion Policy)</li><li>Quan sát: observation space, action space, reward, episode, rollout video</li><li>Ghi chép: "Mình đang hiểu gì, chưa hiểu gì" cho từng demo</li></ul></div>
+        <div class="col"><div class="col-title">Tools</div><ul class="skill-list"><li>Gymnasium</li><li>MuJoCo (pip install)</li><li>LeRobot hoặc Diffusion Policy pretrained</li><li>Google Colab</li></ul></div>
+        <div class="col"><div class="col-title">Pass Criteria</div><ul class="skill-list"><li>2 demo chạy được, có rollout video</li><li>1 trang ghi chép: observation/action/reward là gì, policy là gì, tại sao thành công/thất bại</li><li>Hiểu sơ bộ pipeline: obs → policy → action → env</li></ul></div>
+      </div>
+      <details class="phase-resources">
+        <summary class="resources-toggle"><span class="col-title">Tài liệu gợi ý</span><span class="res-count">2 nguồn</span><span class="toggle-icon">▶</span></summary>
+        <div class="resources-body">
+          <div class="course-item"><span class="course-name">Gymnasium Documentation — Getting Started</span><a class="course-link" href="https://gymnasium.farama.org/introduction/basic_usage/" target="_blank">Docs</a><span class="course-note">Hiểu env.reset(), env.step(), observation, action, reward, done.</span></div>
+          <div class="course-item"><span class="course-name">LeRobot — Pretrained Policy Inference</span><a class="course-link" href="https://huggingface.co/docs/lerobot/index" target="_blank">HF Docs</a><span class="course-note">Chạy pretrained policy trên Push-T sim, quan sát pipeline end-to-end.</span></div>
+        </div>
+      </details>
+      <div class="ratio-row"><span class="ratio-badge ratio-ai">Core Build Path</span><span class="ratio-badge ratio-ai">Laptop / Colab</span></div>
+    </div>
+  </details>
+
+  <!-- ══ PHASE 1 ══ -->
+  <details class="phase ph1" id="ph1">
+    <summary class="phase-head">
+      <span class="phase-badge">Phase 1</span>
+      <span class="phase-title">Deep Learning &amp; Math Foundations</span>
+      <span class="phase-meta">4–5 tháng</span>
+      <span class="phase-output">Output: training loop tự viết + optimizer ablation + KL/entropy bằng tay.</span>
+      <span class="toggle-icon">▶</span>
+    </summary>
+    <div class="phase-body">
+      <div class="project-hero"><div class="project-icon">🧠</div><div><div class="project-label">Goal</div><div class="project-name">Hiểu cơ chế Deep Learning + toán gốc rễ đủ để tự implement, debug và giải thích</div><div class="project-desc">Phase này xây nền cho toàn bộ roadmap. Ngoài backprop, optimizer, regularization, bổ sung Information Theory (KL, entropy) — nền tảng toán mà mọi generative model và loss function đều dựa vào.</div></div></div>
+      <div class="col-grid">
+        <div class="col"><div class="col-title">Skills</div><ul class="skill-list"><li>Linear algebra: matrix multiplication, projection, eigenvalue, SVD</li><li>Probability/statistics: distribution, MLE, MAP, expectation, variance</li><li><strong>Information Theory: entropy, cross-entropy, KL divergence, mutual information</strong></li><li><strong>Variational Inference overview: ELBO concept, approximate posterior</strong></li><li>Backpropagation: computational graph, gradient flow, autograd</li><li>Implement MLP bằng NumPy, MLP/CNN bằng PyTorch</li><li>Optimizer: SGD, Adam, weight decay, LR schedule</li><li>Regularization: dropout, batch norm, augmentation</li></ul></div>
+        <div class="col"><div class="col-title">Tools</div><ul class="skill-list"><li>NumPy</li><li>PyTorch</li><li>Matplotlib</li><li>TensorBoard hoặc W&amp;B</li><li>Kaggle hoặc Colab free</li></ul></div>
+        <div class="col"><div class="col-title">Pass Criteria</div><ul class="skill-list"><li>Tự viết MLP NumPy, giải thích từng tensor shape</li><li>So sánh SGD/Adam/LR/weight decay bằng ablation</li><li>Implement CNN nhỏ hoặc attention block</li><li><strong>Tính KL divergence giữa 2 Gaussian bằng tay</strong></li><li><strong>Giải thích: cross-entropy loss = MLE dưới dạng nào?</strong></li><li>Report giải thích vì sao model học hoặc không học</li></ul></div>
+      </div>
+      <div class="checkpoint"><div class="col-title">Knowledge Checkpoints</div><ul class="skill-list"><li><strong>Checkpoint 1 (~3 tuần):</strong> Backprop tay cho MLP nhỏ, không dùng autograd.</li><li><strong>Checkpoint 2 (~4 tuần):</strong> Training dynamics: overfit một batch, rồi thêm regularization. So sánh optimizer bằng ablation.</li><li><strong>Checkpoint 3 (~5 tuần):</strong> Architecture: CNN hoặc attention block chạy được, có ablation.</li><li><strong>Checkpoint 4 (~4 tuần):</strong> Information Theory — tính KL, entropy, cross-entropy bằng tay; giải thích mối quan hệ với loss function trong DL.</li></ul></div>
+      <details class="phase-resources">
+        <summary class="resources-toggle"><span class="col-title">Tài liệu</span><span class="res-count">7 nguồn</span><span class="toggle-icon">▶</span></summary>
+        <div class="resources-body">
+          <div class="course-item"><span class="course-name">3Blue1Brown: Essence of Linear Algebra</span><a class="course-link" href="https://www.youtube.com/playlist?list=PLZHQObOWTQDPD3MizzM2xVFitgF8hE_ab" target="_blank">YouTube playlist</a><span class="course-note">Linear algebra trực quan.</span></div>
+          <div class="course-item"><span class="course-name">StatQuest: Statistics Fundamentals</span><a class="course-link" href="https://www.youtube.com/playlist?list=PLblh5JKOoLUK0FLuzwntyYI10UQFUhsY9" target="_blank">YouTube playlist</a><span class="course-note">Probability/statistics đủ dùng cho ML.</span></div>
+          <div class="course-item"><span class="course-name">Andrej Karpathy: Neural Networks Zero to Hero</span><a class="course-link" href="https://www.youtube.com/playlist?list=PLAqhIrjkxbuWI23v9cThsA9GvCAUhRvKZ" target="_blank">YouTube playlist</a><span class="course-note">Core source: micrograd → MLP → BatchNorm → training loop.</span></div>
+          <div class="course-item"><span class="course-name">Aurélien Géron: Entropy, Cross-Entropy and KL-Divergence</span><a class="course-link" href="https://www.youtube.com/watch?v=ErfnhcEV1O8" target="_blank">YouTube</a><span class="course-note">Information Theory trực quan cho ML.</span></div>
+          <div class="course-item"><span class="course-name">StatQuest: Entropy, Cross-Entropy, KL Divergence</span><a class="course-link" href="https://www.youtube.com/watch?v=YtebGVx-Fxw" target="_blank">YouTube</a><span class="course-note">Bổ sung trực giác cho Information Theory.</span></div>
+          <div class="course-item"><span class="course-name">Dive into Deep Learning (d2l.ai)</span><a class="course-link" href="https://d2l.ai/" target="_blank">Online textbook</a><span class="course-note">Textbook miễn phí có code PyTorch. Dùng như reference khi cần đọc sâu hơn video.</span></div>
+          <div class="course-item"><span class="course-name">Mathematics for Machine Learning (Deisenroth et al.)</span><a class="course-link" href="https://mml-book.github.io/" target="_blank">Free PDF</a><span class="course-note">Linear algebra, probability, optimization — reference cho toán gốc rễ.</span></div>
+        </div>
+      </details>
+      <div class="ratio-row"><span class="ratio-badge ratio-ai">Core Build Path</span><span class="ratio-badge ratio-ai">Laptop + Colab/Kaggle</span></div>
+    </div>
+  </details>
+
+  <!-- ══ PHASE 2A ══ -->
+  <details class="phase ph2a" id="ph2a">
+    <summary class="phase-head">
+      <span class="phase-badge">Phase 2A</span>
+      <span class="phase-title">Computer Vision — Mắt của Robot</span>
+      <span class="phase-meta">2–3 tháng · song song 2B</span>
+      <span class="phase-output">Output: vision model fine-tuned + encoder comparison report.</span>
+      <span class="toggle-icon">▶</span>
+    </summary>
+    <div class="phase-body">
+      <div class="project-hero"><div class="project-icon">👁️</div><div><div class="project-label">Goal</div><div class="project-name">Hiểu và implement vision encoder đủ mạnh làm "mắt" cho robot brain</div><div class="project-desc">Tập trung vào CV models (CNN, ViT, CLIP) và camera cơ bản. Phần camera pipeline/ROS2 chuyển sang Phase 5 khi tích hợp system.</div></div></div>
+      <div class="col-grid">
+        <div class="col"><div class="col-title">Skills</div><ul class="skill-list"><li>CNN: convolution, pooling, detection, segmentation, IoU, confusion matrix</li><li>ViT: self-attention, patch embedding, positional encoding</li><li>CLIP: contrastive image-text alignment (chi tiết ở 2C)</li><li>Fine-tuning vs feature extraction, frozen encoder</li><li>Camera intrinsic/extrinsic, CameraInfo, RGB-D/depth cơ bản</li><li>Image preprocessing, augmentation cho robot vision</li></ul></div>
+        <div class="col"><div class="col-title">Tools</div><ul class="skill-list"><li>PyTorch, TorchVision</li><li>Hugging Face Transformers</li><li>OpenCV</li><li>Roboflow hoặc dataset nhỏ tự tạo</li><li>Kaggle GPU hoặc Colab</li></ul></div>
+        <div class="col"><div class="col-title">Pass Criteria</div><ul class="skill-list"><li>Fine-tune CNN/ViT trên object dataset nhỏ</li><li>So sánh CNN baseline với ViT — ablation encoder</li><li>Ablation: augmentation, LR, frozen encoder</li><li>Hiểu camera intrinsic/extrinsic, calibration cơ bản</li><li>Report: encoder nào phù hợp cho robot observation</li></ul></div>
+      </div>
+      <details class="phase-resources">
+        <summary class="resources-toggle"><span class="col-title">Tài liệu</span><span class="res-count">4 nguồn — v8.2 bổ sung ViT</span><span class="toggle-icon">▶</span></summary>
+        <div class="resources-body">
+          <div class="gap-note"> CS231N 2017 không cover ViT. Đã bổ sung 2 nguồn ViT bên dưới.</div>
+          <div class="course-item"><span class="course-name">Stanford CS231N: Convolutional Neural Networks (Spring 2017)</span><a class="course-link" href="https://www.youtube.com/playlist?list=PL3FW7Lu3i5JvHM8ljYj-zLfQRF3EO8sYv" target="_blank">YouTube playlist</a><span class="course-note">Core source cho CNN, detection, segmentation, evaluation.</span></div>
+          <div class="course-item"><span class="course-name">Andrej Karpathy: Let's build ViT from scratch</span><a class="course-link" href="https://www.youtube.com/watch?v=d3N_-JbHGCo" target="_blank">YouTube</a><span class="course-note" style="color:#8B4513"><strong>[v8.2 — bổ sung]</strong> Build ViT từ đầu với PyTorch: patch embedding, self-attention, positional encoding. Bắt buộc cho người mới với ViT.</span></div>
+          <div class="course-item"><span class="course-name">Hugging Face: Vision Transformers — Tutorial &amp; Fine-tuning</span><a class="course-link" href="https://huggingface.co/docs/transformers/model_doc/vit" target="_blank">HF Docs</a><span class="course-note" style="color:#8B4513"><strong>[v8.2 — bổ sung]</strong> Hands-on ViT fine-tuning với pretrained model. Bổ sung sau khi đã hiểu kiến trúc từ Karpathy video.</span></div>
+          <div class="course-item"><span class="course-name">OpenCV Camera Calibration</span><a class="course-link" href="https://docs.opencv.org/4.x/dc/dbb/tutorial_py_calibration.html" target="_blank">OpenCV docs</a><span class="course-note">Hiểu intrinsic, distortion, calibration và rectification.</span></div>
+        </div>
+      </details>
+      <div class="ratio-row"><span class="ratio-badge ratio-ai">Core Build Path</span><span class="ratio-badge ratio-ai">Kaggle GPU / Colab</span></div>
+    </div>
+  </details>
+
+  <!-- ══ PHASE 2B ══ -->
+  <details class="phase ph2b" id="ph2b">
+    <summary class="phase-head">
+      <span class="phase-badge">Phase 2B</span>
+      <span class="phase-title">Language &amp; LLM Foundations — Tai và Miệng của Robot</span>
+      <span class="phase-meta">2–3 tháng · song song 2A</span>
+      <span class="phase-output">Output: nanoGPT trained + LLM fine-tuned + tokenizer report.</span>
+      <span class="toggle-icon">▶</span>
+    </summary>
+    <div class="phase-body">
+      <div class="project-hero"><div class="project-icon">🗣️</div><div><div class="project-label">Goal</div><div class="project-name">Hiểu cách Language Model hoạt động — nền tảng cho VLA và robot giao tiếp</div><div class="project-desc">VLA (Vision-Language-Action) — công nghệ gần Baymax nhất — có backbone là LLM. Không hiểu LLM = không hiểu VLA. Phase này dạy từ tokenization đến autoregressive generation và instruction tuning.</div></div></div>
+      <div class="col-grid">
+        <div class="col"><div class="col-title">Skills</div><ul class="skill-list"><li>Tokenization: BPE, WordPiece, SentencePiece</li><li>Word/token embeddings và positional encoding</li><li>Transformer cho language: <strong>causal attention masking</strong>, autoregressive generation</li><li>Autoregressive modeling: next-token prediction, sampling (temperature, top-k, top-p)</li><li>Pre-training vs fine-tuning LLM</li><li>Instruction tuning và RLHF ở mức concept</li><li>In-context learning, prompt engineering cơ bản</li></ul></div>
+        <div class="col"><div class="col-title">Tools</div><ul class="skill-list"><li>PyTorch</li><li>Hugging Face Transformers</li><li>nanoGPT (Karpathy)</li><li>Colab / Kaggle</li><li>LoRA / PEFT library</li></ul></div>
+        <div class="col"><div class="col-title">Pass Criteria</div><ul class="skill-list"><li>Train nanoGPT nhỏ trên text dataset, generate text hợp lý</li><li>Giải thích causal masking vs bidirectional attention</li><li>Fine-tune LLM nhỏ (hoặc LoRA) trên instruction dataset</li><li>So sánh base model vs fine-tuned model trên task cụ thể</li><li>Report: tokenization → embedding → attention → generation pipeline</li></ul></div>
+      </div>
+      <div class="checkpoint"><div class="col-title">Knowledge Checkpoints</div><ul class="skill-list"><li><strong>Checkpoint 1:</strong> Tokenizer — implement BPE đơn giản, hiểu tại sao subword tokenization.</li><li><strong>Checkpoint 2:</strong> nanoGPT — train từ đầu trên text nhỏ, giải thích attention pattern.</li><li><strong>Checkpoint 3:</strong> Fine-tuning — LoRA trên LLM nhỏ, so sánh trước/sau fine-tune.</li></ul></div>
+      <details class="phase-resources">
+        <summary class="resources-toggle"><span class="col-title">Tài liệu</span><span class="res-count">5 nguồn</span><span class="toggle-icon">▶</span></summary>
+        <div class="resources-body">
+          <div class="course-item"><span class="course-name">Andrej Karpathy: Let's build GPT</span><a class="course-link" href="https://www.youtube.com/watch?v=kCc8FmEb1nY" target="_blank">YouTube</a><span class="course-note">Core source: self-attention, causal masking, autoregressive generation từ đầu.</span></div>
+          <div class="course-item"><span class="course-name">Andrej Karpathy: Let's build the GPT Tokenizer</span><a class="course-link" href="https://www.youtube.com/watch?v=zduSFxRajkE" target="_blank">YouTube</a><span class="course-note">BPE tokenization từ đầu.</span></div>
+          <div class="course-item"><span class="course-name">Andrej Karpathy: Intro to Large Language Models</span><a class="course-link" href="https://www.youtube.com/watch?v=zjkBMFhNj_g" target="_blank">YouTube</a><span class="course-note">Overview LLM landscape, pre-training, fine-tuning, RLHF.</span></div>
+          <div class="course-item"><span class="course-name">Jay Alammar: The Illustrated Transformer</span><a class="course-link" href="https://jalammar.github.io/illustrated-transformer/" target="_blank">Blog</a><span class="course-note">Trực quan hóa attention mechanism.</span></div>
+          <div class="course-item"><span class="course-name">Stanford CS224N — selected lectures</span><a class="course-link" href="https://www.youtube.com/playlist?list=PLoROMvodv4rMFqRtEuo6SGjY4XbRIVRd4" target="_blank">YouTube playlist</a><span class="course-note">Chọn lọc: Word Vectors, Transformers, Pretraining. Không cần toàn bộ.</span></div>
+        </div>
+      </details>
+      <div class="ratio-row"><span class="ratio-badge ratio-lang">Core Build Path</span><span class="ratio-badge ratio-ai">Colab / Kaggle</span></div>
+    </div>
+  </details>
+
+  <!-- ══ PHASE 2C ══ -->
+  <details class="phase ph2c" id="ph2c">
+    <summary class="phase-head">
+      <span class="phase-badge">Phase 2C</span>
+      <span class="phase-title">Multimodal Fusion — Nối Mắt + Tai + Miệng</span>
+      <span class="phase-meta">2–3 tháng · sau 2A+2B</span>
+      <span class="phase-output">Output: CLIP/VLM experiment + Audio architecture analysis + cascaded vs end-to-end HRI demo.</span>
+      <span class="toggle-icon">▶</span>
+    </summary>
+    <div class="phase-body">
+      <div class="project-hero"><div class="project-icon">🔗</div><div><div class="project-label">Goal</div><div class="project-name">Hiểu cách nối Vision, Language và Audio thành một biểu diễn thống nhất — tiền đề cho VLA và HRI robot</div><div class="project-desc">Phase này nối 2A và 2B lại theo 2 luồng song song. <strong>2C-VL:</strong> CLIP, LLaVA, Flamingo — kiến trúc nền tảng mà VLA xây trên. <strong>2C-Audio:</strong> Hiểu cách máy biểu diễn âm thanh, kiến trúc bên trong Whisper/TTS, và concept Audio Tokens — nền tảng cho robot giao tiếp bằng giọng nói (HRI). Với định hướng Mini-Baymax, Voice là giao diện giao tiếp chính, không phải tính năng phụ.</div></div></div>
+
+      <!-- SUB-PHASE 2C-VL -->
+      <div class="checkpoint"><div class="col-title">Sub-phase 2C-VL — Vision-Language Fusion (~5–6 tuần)</div><ul class="skill-list"><li><strong>Core kiến trúc:</strong> CLIP (contrastive), LLaVA (visual tokens → LLM), Flamingo (cross-attention gating)</li><li><strong>InfoNCE loss derivation — toán gốc rễ</strong></li><li>Cross-attention: vision features attend to language và ngược lại</li><li>Multimodal embedding space: tại sao image-text alignment hoạt động</li><li>Zero-shot transfer: dùng CLIP/VLM cho task chưa từng thấy</li></ul></div>
+      <div class="col-grid">
+        <div class="col"><div class="col-title">Skills — 2C-VL</div><ul class="skill-list"><li>CLIP deep dive: contrastive learning objective, InfoNCE</li><li>LLaVA: visual projection layer, visual tokens vào LLM</li><li>Flamingo: cross-attention gating, per-layer vision injection</li><li>So sánh kiến trúc: LLaVA (early fusion) vs Flamingo (mid-fusion)</li><li>Tại sao multimodal embedding space cho phép zero-shot transfer</li></ul></div>
+        <div class="col"><div class="col-title">Tools — 2C-VL</div><ul class="skill-list"><li>Hugging Face: CLIP, BLIP-2, LLaVA</li><li>OpenCLIP</li><li>PyTorch</li><li>Colab / Kaggle</li></ul></div>
+        <div class="col"><div class="col-title">Pass Criteria — 2C-VL</div><ul class="skill-list"><li>Trace hoặc implement CLIP training loop nhỏ, hiểu InfoNCE</li><li>So sánh zero-shot CLIP vs fine-tuned vision model</li><li>Chạy inference LLaVA/BLIP trên ảnh + câu hỏi, giải thích architecture</li><li>Report: Vision-only vs Vision+Language trên cùng task</li></ul></div>
+      </div>
+
+      <!-- SUB-PHASE 2C-AUDIO -->
+      <div class="checkpoint" style="margin-top:1rem"><div class="col-title">Sub-phase 2C-Audio — Audio-Language Fusion (~3–4 tuần) <span style="color:#8B4513;font-size:11px;font-weight:400">[v8.9 — bổ sung cho HRI / Mini-Baymax]</span></div><ul class="skill-list"><li><strong>Tại sao Audio nằm ở đây, không phải Phase 5:</strong> Audio Models có kiến trúc riêng (Encoder-Decoder Transformer trên spectrogram) cần hiểu ở tầng AI, không phải ở tầng system integration. Hiểu architecture = có thể fine-tune, debug, thay thế component — không chỉ dùng như black box.</li><li><strong>Không học TTS/ASR từ scratch</strong> (Option C). Mục tiêu là hiểu đủ để fine-tune và tích hợp vào HRI pipeline.</li></ul></div>
+      <div class="col-grid">
+        <div class="col"><div class="col-title">Skills — 2C-Audio</div><ul class="skill-list"><li><strong>Audio signal representation:</strong> waveform → sampling rate → Mel-Spectrogram → log-Mel. Tại sao không feed raw waveform vào Transformer</li><li><strong>Short-Time Fourier Transform (STFT):</strong> window, hop length, frequency bins — đủ đọc code Whisper/torchaudio</li><li><strong>Whisper architecture (ASR):</strong> CNN feature extractor trên Mel-Spectrogram → Transformer Encoder → Decoder autoregressive. So sánh với text Transformer (Phase 2B): điểm giống và khác</li><li><strong>Wav2Vec 2.0 concept:</strong> self-supervised audio pretraining, contrastive objective trên audio — analogy với CLIP cho vision</li><li><strong>TTS pipeline hiện đại:</strong> Text → phonemes/tokens → acoustic model (Mel-Spectrogram) → vocoder (waveform). Hiểu vai trò từng bước trong Coqui TTS / Kokoro</li><li><strong>Cascaded vs End-to-End Audio-LLM:</strong> Cascaded (Whisper → text → LLM → text → TTS) vs End-to-end (Audio tokens trực tiếp vào LLM như Qwen-Audio, Gemini). Trade-off latency và độ phức tạp</li><li><strong>Audio Tokens concept:</strong> cách audio được discretize (VQ-VAE, EnCodec) để feed vào LLM như token — tiền đề cho Audio-Language Fusion thật sự</li><li><strong>Whisper fine-tuning:</strong> khi nào cần fine-tune (domain mismatch, accent, robot command vocabulary), cách set up với Hugging Face</li></ul></div>
+        <div class="col"><div class="col-title">Tools — 2C-Audio</div><ul class="skill-list"><li>torchaudio (Mel-Spectrogram, STFT)</li><li>Hugging Face: openai/whisper-small, Wav2Vec2</li><li>Coqui TTS hoặc Kokoro TTS (open-source)</li><li>librosa (audio visualization)</li><li>Colab / Kaggle CPU — không cần GPU lớn</li></ul></div>
+        <div class="col"><div class="col-title">Pass Criteria — 2C-Audio</div><ul class="skill-list"><li>Viết code: load audio → compute Mel-Spectrogram → visualize. Giải thích tại sao Mel scale, không phải linear frequency</li><li>Trace Whisper encoder: từ Mel-Spectrogram → CNN → Transformer Encoder output. Giải thích shape của từng tensor</li><li>Chạy Whisper inference trên voice sample tiếng Anh, đo WER (Word Error Rate)</li><li>Chạy Coqui TTS hoặc Kokoro: text → speech output. Nghe và đánh giá naturalness</li><li>Build cascaded HRI mini-demo: microphone → Whisper → LLM (câu lệnh robot) → TTS → speaker. Demo robot hiểu và phản hồi 1 lệnh đơn giản</li><li>Report: "Cascaded vs End-to-End Audio-LLM — khi nào dùng cái gì, và tại sao Audio Tokens là bước tiến về mặt kiến trúc"</li></ul></div>
+      </div>
+
+      <!-- RESOURCES -->
+      <details class="phase-resources">
+        <summary class="resources-toggle"><span class="col-title">Tài liệu 2C-VL</span><span class="res-count">5 nguồn</span><span class="toggle-icon">▶</span></summary>
+        <div class="resources-body">
+          <div class="gap-note"> Flamingo được nhắc trong Skills nhưng thiếu link ở v8.8.2. Đã bổ sung.</div>
+          <div class="course-item"><span class="course-name">CLIP paper (Radford et al., 2021)</span><a class="course-link" href="https://arxiv.org/abs/2103.00020" target="_blank">arXiv</a><span class="course-note">Đọc + trace code. Hiểu contrastive objective và InfoNCE.</span></div>
+          <div class="course-item"><span class="course-name">LLaVA paper (Liu et al., 2023)</span><a class="course-link" href="https://arxiv.org/abs/2304.08485" target="_blank">arXiv</a><span class="course-note">Hiểu cách nối visual tokens vào LLM qua projection layer.</span></div>
+          <div class="course-item"><span class="course-name">Flamingo paper (Alayrac et al., 2022)</span><a class="course-link" href="https://arxiv.org/abs/2204.14198" target="_blank">arXiv</a><span class="course-note">Cross-attention gating để nối vision features vào LLM. Đọc Sections 2–3 để hiểu kiến trúc khác với LLaVA.</span></div>
+          <div class="course-item"><span class="course-name">Lilian Weng: Contrastive Representation Learning</span><a class="course-link" href="https://lilianweng.github.io/posts/2021-05-31-contrastive/" target="_blank">Blog</a><span class="course-note">InfoNCE, contrastive objectives — nền tảng toán cho CLIP và Wav2Vec.</span></div>
+          <div class="course-item"><span class="course-name">Hugging Face: CLIP Tutorial</span><a class="course-link" href="https://huggingface.co/docs/transformers/model_doc/clip" target="_blank">HF docs</a><span class="course-note">Hands-on CLIP inference và fine-tuning.</span></div>
+        </div>
+      </details>
+
+      <details class="phase-resources">
+        <summary class="resources-toggle"><span class="col-title">Tài liệu 2C-Audio</span><span class="res-count">6 nguồn — v8.9 bổ sung</span><span class="toggle-icon">▶</span></summary>
+        <div class="resources-body">
+          <div class="gap-note" style="color:#8B4513"> <strong>[v8.9]</strong> Toàn bộ mục Audio-Language Fusion được bổ sung để hỗ trợ định hướng Mini-Baymax / HRI. Không cần GPU lớn.</div>
+          <div class="course-item"><span class="course-name">3Blue1Brown: But what is a Fourier transform? (Video)</span><a class="course-link" href="https://www.youtube.com/watch?v=spUNpyF58BY" target="_blank">YouTube</a><span class="course-note">Trực quan hóa STFT và frequency domain. Bắt đầu tại đây trước khi đọc torchaudio docs.</span></div>
+          <div class="course-item"><span class="course-name">Hugging Face Audio Course — Chapter 1–3</span><a class="course-link" href="https://huggingface.co/learn/audio-course/chapter0/introduction" target="_blank">HF Audio Course</a><span class="course-note">Mel-Spectrogram, Whisper architecture, ASR pipeline. Đây là nguồn chính cho 2C-Audio. Chỉ cần Chapter 1–3 (bỏ Chapter 4–8 nếu không cần production deployment).</span></div>
+          <div class="course-item"><span class="course-name">Whisper paper (Radford et al., 2022)</span><a class="course-link" href="https://arxiv.org/abs/2212.04356" target="_blank">arXiv</a><span class="course-note">Đọc Section 2–3: kiến trúc CNN+Transformer Encoder-Decoder, log-Mel spectrogram input. So sánh với text Transformer (2B).</span></div>
+          <div class="course-item"><span class="course-name">Wav2Vec 2.0 paper (Baevski et al., 2020)</span><a class="course-link" href="https://arxiv.org/abs/2006.11477" target="_blank">arXiv</a><span class="course-note">Self-supervised audio pretraining với contrastive objective. Analogy trực tiếp với CLIP (2C-VL): cùng tư duy "học biểu diễn không cần label".</span></div>
+          <div class="course-item"><span class="course-name">Coqui TTS — Getting Started</span><a class="course-link" href="https://docs.coqui.ai/en/latest/tutorial_for_nervous_beginners.html" target="_blank">Docs</a><span class="course-note">TTS pipeline: text → Mel-Spectrogram → vocoder → waveform. Hands-on, không cần hiểu toàn bộ training.</span></div>
+          <div class="course-item"><span class="course-name">Qwen-Audio paper (Chu et al., 2023)</span><a class="course-link" href="https://arxiv.org/abs/2311.07919" target="_blank">arXiv</a><span class="course-note">Đọc Introduction + Section 2 để hiểu concept Audio Tokens và end-to-end Audio-LLM. Không cần reproduce, chỉ cần hiểu kiến trúc tại sao tiến bộ hơn cascaded.</span></div>
+        </div>
+      </details>
+
+      <div class="ratio-row"><span class="ratio-badge ratio-lang">Core Build Path</span><span class="ratio-badge ratio-ai">Kaggle GPU / Colab</span><span class="ratio-badge ratio-lang">v8.9 — Audio-Language mở rộng</span></div>
+    </div>
+  </details>
+
+  <!-- ══ PHASE 3 ══ -->
+  <details class="phase ph3" id="ph3">
+    <summary class="phase-head">
+      <span class="phase-badge">Phase 3</span>
+      <span class="phase-title">Generative Models &amp; Policy Foundations</span>
+      <span class="phase-meta">4–5 tháng</span>
+      <span class="phase-output">Output: VAE + DDPM + ELBO derivation + BC baseline.</span>
+      <span class="toggle-icon">▶</span>
+    </summary>
+    <div class="phase-body">
+      <div class="project-hero"><div class="project-icon">🎲</div><div><div class="project-label">Goal</div><div class="project-name">Hiểu bản chất toán của Generative Models (VAE → Diffusion → Flow) và nối chúng với Policy Learning</div><div class="project-desc">Đây là phase "toán gốc rễ" quan trọng nhất. ACT dùng CVAE, Diffusion Policy dùng DDPM, π₀ dùng Flow Matching — tất cả là generative models. Hiểu gốc rễ ở đây = hiểu mọi policy nâng cao. <strong>⚠ Phase này yêu cầu calculus đa biến (chain rule, tích phân).</strong> Nếu chưa vững, ôn lại trước 3A.</div></div></div>
+      <div class="col-grid">
+        <div class="col"><div class="col-title">Skills — Generative Models</div><ul class="skill-list"><li>VAE: encoder-decoder, latent space, <strong>ELBO derivation</strong>, reparameterization trick</li><li>CVAE: conditional generation, latent conditioned on input</li><li>DDPM: forward diffusion, reverse denoising, <strong>noise schedule, denoising objective</strong></li><li><strong>Score-based modeling: score function, score matching, connection to diffusion</strong></li><li>Flow Matching basics: continuous normalizing flow, optimal transport</li><li>Quan hệ: VAE → Diffusion → Flow = cùng giải "model complex distribution"</li></ul></div>
+        <div class="col"><div class="col-title">Skills — Policy Foundations</div><ul class="skill-list"><li>MDP: state, action, reward, policy, rollout, success rate</li><li>Behavior Cloning: supervised learning trên demonstration</li><li>Distribution shift: compounding error, covariate shift</li><li>DAgger: interactive imitation learning</li><li><strong>Policy Gradient: REINFORCE, advantage estimation</strong></li><li><strong>PPO basics: clipped objective, value function baseline</strong></li><li>Action representation: continuous, discrete, chunked, tokenized</li><li>Tại sao policy = generative model: multimodal action distribution</li></ul></div>
+        <div class="col"><div class="col-title">Pass Criteria</div><ul class="skill-list"><li>Implement VAE trên MNIST, generate samples, visualize latent space</li><li><strong>Derivation ELBO bằng tay, giải thích từng term</strong></li><li>Implement DDPM nhỏ trên 2D toy data hoặc MNIST</li><li>Train BC baseline trên Push-T hoặc tương đương</li><li>Report: "Tại sao BC fail ở multimodal tasks và generative policy giải quyết thế nào"</li></ul></div>
+      </div>
+      <div class="checkpoint"><div class="col-title">Sub-phases</div><ul class="skill-list"><li><strong>3A — VAE (~5 tuần):</strong> train VAE, generate, giải thích ELBO, visualize latent space.</li><li><strong>3B — DDPM (~5 tuần):</strong> train denoising model, hiểu noise schedule, so sánh sample quality.</li><li><strong>3C — BC baseline (~3 tuần):</strong> train BC trên sim task nhỏ, có success rate và rollout video.</li><li><strong>3D — RL (~4 tuần):</strong> implement REINFORCE trên CartPole/LunarLander, hiểu policy gradient và advantage. PPO trên Gymnasium env, so sánh REINFORCE vs PPO.</li><li><strong>3E — Synthesis (~2 tuần):</strong> report nối generative models với policy learning: "Tại sao policy = generative model?"</li></ul></div>
+      <details class="phase-resources">
+        <summary class="resources-toggle"><span class="col-title">Tài liệu</span><span class="res-count">7 nguồn</span><span class="toggle-icon">▶</span></summary>
+        <div class="resources-body">
+          <div class="course-item"><span class="course-name">Lilian Weng: What are Diffusion Models?</span><a class="course-link" href="https://lilianweng.github.io/posts/2021-07-11-diffusion-models/" target="_blank">Blog</a><span class="course-note">Excellent: DDPM, score matching, connection to VAE.</span></div>
+          <div class="course-item"><span class="course-name">Lilian Weng: From Autoencoder to Beta-VAE</span><a class="course-link" href="https://lilianweng.github.io/posts/2018-08-12-vae/" target="_blank">Blog</a><span class="course-note">VAE, ELBO, reparameterization trick.</span></div>
+          <div class="course-item"><span class="course-name">Flow Matching Guide and Code (Lipman et al., 2024)</span><a class="course-link" href="https://arxiv.org/abs/2412.06264" target="_blank">arXiv</a><span class="course-note">Tài liệu tự chứa về Flow Matching: toán, design choices, và PyTorch examples. Nền tảng cho π₀.</span></div>
+          <div class="course-item"><span class="course-name">UC Berkeley CS285 — Lectures 2–5</span><a class="course-link" href="https://www.youtube.com/playlist?list=PL_iWQOsE6TfVYGEGiAOMaOzzv41Jfm_Ps" target="_blank">YouTube playlist</a><span class="course-note">BC, distribution shift, DAgger, policy gradient.</span></div>
+          <div class="course-item"><span class="course-name">David Silver: Introduction to Reinforcement Learning</span><a class="course-link" href="https://www.youtube.com/playlist?list=PLqYmG7hTraZDM-OYHWgPebj2MfCFzFObQ" target="_blank">YouTube playlist</a><span class="course-note">Kinh điển về RL lý thuyết: MDP, value function, policy gradient, planning.</span></div>
+          <div class="course-item"><span class="course-name">Spinning Up in Deep RL (OpenAI)</span><a class="course-link" href="https://spinningup.openai.com/en/latest/" target="_blank">Docs</a><span class="course-note">Policy gradient, PPO, value functions — practical và có code.</span></div>
+          <div class="course-item"><span class="course-name">Denoising Diffusion Probabilistic Models (Ho et al., 2020)</span><a class="course-link" href="https://arxiv.org/abs/2006.11239" target="_blank">arXiv</a><span class="course-note">Original DDPM paper — đọc + trace implementation.</span></div>
+        </div>
+      </details>
+      <div class="ratio-row"><span class="ratio-badge ratio-gen">Core Build Path</span><span class="ratio-badge ratio-ai">GPU 8–12 GB / thuê theo giờ</span></div>
+    </div>
+  </details>
+
+  <!-- ══ PHASE 4 ══ -->
+  <details class="phase ph4" id="ph4">
+    <summary class="phase-head">
+      <span class="phase-badge">Phase 4</span>
+      <span class="phase-title">Robot Learning in Simulation</span>
+      <span class="phase-meta">5–6 tháng</span>
+      <span class="phase-output">Output: BC vs ACT vs Diffusion Policy comparison + data pipeline.</span>
+      <span class="toggle-icon">▶</span>
+    </summary>
+    <div class="phase-body">
+      <div class="project-hero"><div class="project-icon">🎮</div><div><div class="project-label">Goal</div><div class="project-name">Train và so sánh policy models trong simulation — BC, ACT, Diffusion Policy</div><div class="project-desc">Giờ đã có nền Generative Models vững (Phase 3), phase này áp dụng vào robot policy thực sự. Train baseline trước, sau đó ACT (CVAE) và Diffusion Policy (DDPM) — hiểu sâu vì đã biết toán. Thêm sim-to-real basics.</div></div></div>
+      <div class="col-grid">
+        <div class="col"><div class="col-title">Skills</div><ul class="skill-list"><li>Observation/action space: joint, Cartesian, image, state</li><li>BC baseline trên FetchReach/Push-T (củng cố từ Phase 3)</li><li>ACT: action chunking, temporal ensembling, CVAE encoder</li><li>Diffusion Policy: denoising action trajectory generation</li><li>BeT/VQ-BeT: vector quantization cho action space</li><li>Encoder choice: ResNet vs ViT vs CLIP frozen</li><li><strong>Data collection: teleoperation, scripted policy, data quality filtering</strong></li><li><strong>Dataset format: zarr, HDF5, LeRobot dataset format, data augmentation cho robot</strong></li><li><strong>Sim-to-Real basics: domain randomization, visual/dynamics randomization</strong></li><li>Rollout evaluation: success rate, multi-seed, video logging, task completion time, trajectory smoothness</li><li>Failure analysis: data, architecture, action space, distribution</li></ul></div>
+        <div class="col"><div class="col-title">Tools</div><ul class="skill-list"><li>Gymnasium / Gymnasium-Robotics</li><li>MuJoCo</li><li>FetchReach, Push-T, ALOHA sim</li><li>LeRobot</li><li>TensorBoard / W&amp;B</li><li><strong>RLBench / CALVIN (benchmark)</strong></li></ul></div>
+        <div class="col"><div class="col-title">Pass Criteria</div><ul class="skill-list"><li>BC vs ACT vs Diffusion Policy trên cùng task/seed/metric</li><li>Ablation: encoder, action horizon, data size</li><li>Domain randomization experiment: train → eval trên shifted env</li><li>Rollout video + failure analysis</li><li>Workshop-style report với compute budget</li></ul></div>
+      </div>
+      <div class="checkpoint"><div class="col-title">Sub-phases</div><ul class="skill-list"><li><strong>4A — Data &amp; Baseline (~5 tuần):</strong> Collect demonstrations, định dạng dataset, train BC trên FetchReach/Push-T, success rate qua nhiều seed.</li><li><strong>4B — ACT (~4 tuần):</strong> train ACT, hiểu action chunking + CVAE (nền từ Phase 3).</li><li><strong>4C — Diffusion Policy (~4 tuần):</strong> train Diffusion Policy, hiểu denoising trajectory (nền từ Phase 3).</li><li><strong>4D — Comparison (~3 tuần):</strong> cố định seed/dataset/metric, so sánh BC vs ACT vs Diffusion.</li><li><strong>4E — Sim-to-Real (~4 tuần):</strong> domain randomization ablation trên visual/dynamics.</li></ul></div>
+      <details class="phase-resources">
+        <summary class="resources-toggle"><span class="col-title">Tài liệu</span><span class="res-count">9 nguồn</span><span class="toggle-icon">▶</span></summary>
+        <div class="resources-body">
+          <div class="course-item"><span class="course-name">LeRobot documentation</span><a class="course-link" href="https://huggingface.co/docs/lerobot/index" target="_blank">Hugging Face docs</a><span class="course-note">Core implementation source cho train/evaluate policy.</span></div>
+          <div class="course-item"><span class="course-name">Gymnasium-Robotics FetchReach</span><a class="course-link" href="https://robotics.farama.org/envs/fetch/reach/" target="_blank">Farama docs</a><span class="course-note">Bridge task: observation, Cartesian action, sim step, success metric.</span></div>
+          <div class="course-item"><span class="course-name">Yannic Kilcher — ACT paper walkthrough</span><a class="course-link" href="https://www.youtube.com/watch?v=zT6VYKiKcSA" target="_blank">YouTube</a><span class="course-note">Paper walkthrough — giờ đã hiểu CVAE từ Phase 3.</span></div>
+          <div class="course-item"><span class="course-name">Yannic Kilcher — Diffusion Policy walkthrough</span><a class="course-link" href="https://www.youtube.com/watch?v=bc6H3kY5_qI" target="_blank">YouTube</a><span class="course-note">Paper walkthrough — giờ đã hiểu DDPM từ Phase 3.</span></div>
+          <div class="course-item"><span class="course-name">Diffusion Policy codebase</span><a class="course-link" href="https://diffusion-policy.cs.columbia.edu/" target="_blank">Project page</a><span class="course-note">Trace codebase song song với paper.</span></div>
+          <div class="course-item"><span class="course-name">Modern Robotics — selective</span><a class="course-link" href="https://www.coursera.org/specializations/modernrobotics" target="_blank">Coursera</a><span class="course-note">Chỉ FK/IK đủ hiểu joint state và end-effector action.</span></div>
+          <div class="course-item"><span class="course-name">Domain Randomization (Tobin et al., 2017)</span><a class="course-link" href="https://arxiv.org/abs/1703.06907" target="_blank">arXiv</a><span class="course-note">Nền tảng sim-to-real transfer.</span></div>
+          <div class="course-item"><span class="course-name">Sim-to-Real Robot Learning from Pixels (survey)</span><a class="course-link" href="https://arxiv.org/abs/1812.05687" target="_blank">arXiv</a><span class="course-note">Tổng quan sim-to-real: domain randomization, adaptation, system identification.</span></div>
+          <div class="course-item"><span class="course-name">RLBench: The Robot Learning Benchmark</span><a class="course-link" href="https://sites.google.com/view/rlbench" target="_blank">Project page</a><span class="course-note">100+ tasks cho robot learning benchmark. Dùng để standardized evaluation.</span></div>
+        </div>
+      </details>
+      <div class="ratio-row"><span class="ratio-badge ratio-ai">Core Build Path</span><span class="ratio-badge ratio-ai">GPU 8–12 GB / thuê theo giờ</span></div>
+    </div>
+  </details>
+
+  <!-- ══ PHASE 5 ══ -->
+  <details class="phase ph5" id="ph5">
+    <summary class="phase-head">
+      <span class="phase-badge">Phase 5</span>
+      <span class="phase-title">Robotics System Integration</span>
+      <span class="phase-meta">3–4 tháng</span>
+      <span class="phase-output">Output: closed-loop perception-policy-action system + logs + latency.</span>
+      <span class="toggle-icon">▶</span>
+    </summary>
+    <div class="phase-body">
+      <div class="project-hero"><div class="project-icon">⚙️</div><div><div class="project-label">Goal</div><div class="project-name">Đưa policy vào vòng lặp perception-policy-action trên hệ thống thực</div><div class="project-desc">Brain đã vững (Phase 1–4), giờ nối vào body. Học ROS2, simulation integration, camera pipeline, timing, logging, recovery — đủ để policy chạy trong closed-loop. Simulation-first, tiến tới real robot khi sẵn sàng.</div></div></div>
+      <div class="col-grid">
+        <div class="col"><div class="col-title">Skills</div><ul class="skill-list"><li>ROS2 node, topic, service, parameter, launch file</li><li>URDF, joint state, tf2, frame tree, RViz</li><li>Camera/depth topic, message sync, calibration consistency</li><li>Deploy PyTorch inference thành ROS2 node</li><li>PID intuition: overshoot, oscillation, saturation, settling time</li><li>Action clipping, rate limiting, control loop frequency</li><li><strong>Safety: joint limits, velocity/torque limits, emergency stop, watchdog timer</strong></li><li><strong>Collision detection, workspace boundaries, safe recovery behavior</strong></li><li>rosbag, episode logging, dropped frame, crash recovery</li><li>Dashboard metric: success rate, latency, crash rate</li><li><strong>Tactile sensing overview: force/torque, compliance control cho safe manipulation</strong></li><li><strong>HRI Voice Pipeline [xây trên 2C-Audio]: deploy Whisper inference thành ROS2 node, publish text transcript lên topic, nhận TTS audio từ Coqui/Kokoro và phát qua speaker topic — không còn là black box vì đã hiểu kiến trúc từ Phase 2C</strong></li><li><strong>Latency budget cho voice loop: microphone → ASR → LLM inference → TTS → speaker, đo end-to-end và tối ưu bottleneck</strong></li></ul></div>
+        <div class="col"><div class="col-title">Tools</div><ul class="skill-list"><li>ROS2 Jazzy/Humble tùy Ubuntu</li><li>Gazebo hoặc MuJoCo</li><li>rosbag, RViz</li><li>PyTorch inference node</li><li>Henki ROS2 Essentials</li><li>Brian Douglas PID</li><li>whisper_ros (Hugging Face Whisper → ROS2 topic)</li><li>Coqui TTS hoặc Kokoro (đã dùng ở 2C-Audio)</li><li>audio_common (ROS2 microphone/speaker)</li></ul></div>
+        <div class="col"><div class="col-title">Pass Criteria</div><ul class="skill-list"><li>Closed-loop demo: camera/joint state → policy → action → sim</li><li>Log observation, action, reward/success, done, timestamp</li><li>Đo latency, control frequency, crash/failure rate</li><li>Rollout video kèm failure analysis và recovery checklist</li><li><strong>[HRI] Demo voice command loop: nói lệnh → Whisper ROS2 node → policy/LLM → TTS → robot phản hồi bằng lời. Đo latency từng bước trong pipeline</strong></li></ul></div>
+      </div>
+      <div class="checkpoint"><div class="col-title">Bring-up Checklist</div><ul class="skill-list"><li>Sensor topics publish đều không? Timestamp có lệch không?</li><li>Camera frame, robot base frame, world frame có nhất quán không?</li><li>Policy inference latency bao nhiêu ms? Control loop bao nhiêu Hz?</li><li>Action có bị clipping/saturation không? Có rate limit không?</li><li>Khi fail, log có đủ observation/action/result để debug không?</li><li><strong>Safety: emergency stop hoạt động chưa? Joint limits được enforce chưa? Workspace boundaries đúng chưa?</strong></li><li><strong>Voice loop: Whisper node nhận microphone topic và publish transcript đúng không? WER chấp nhận được trong môi trường thực không? TTS output phát ra speaker topic không bị delay quá 500ms không?</strong></li></ul></div>
+      <details class="phase-resources">
+        <summary class="resources-toggle"><span class="col-title">Tài liệu</span><span class="res-count">5 nguồn</span><span class="toggle-icon">▶</span></summary>
+        <div class="resources-body">
+          <div class="course-item"><span class="course-name">Articulated Robotics — ROS2 for Beginners</span><a class="course-link" href="https://www.youtube.com/playlist?list=PLunhqkrRNRhYYCaSTVP-qJnyUPkTxJnBt" target="_blank">YouTube playlist</a><span class="course-note">Core source cho node/topic/launch/URDF/tf2/Gazebo.</span></div>
+          <div class="course-item"><span class="course-name">Articulated Robotics — How to build a robot with ROS2</span><a class="course-link" href="https://www.youtube.com/playlist?list=PLunhqkrRNRhYAffV8JDiFOatQXuU-NnxT" target="_blank">YouTube playlist</a><span class="course-note">URDF, ros2_control, joint state, RViz, robot bring-up.</span></div>
+          <div class="course-item"><span class="course-name">Henki Robotics and ROS2 Essentials</span><a class="course-link" href="https://github.com/henki-robotics/robotics_essentials_ros2" target="_blank">GitHub course</a><span class="course-note">Practical exercise: ROS2, Docker, Gazebo, hands-on debugging.</span></div>
+          <div class="course-item"><span class="course-name">Brian Douglas — Understanding PID Control</span><a class="course-link" href="https://www.youtube.com/playlist?list=PLn8PRpmsu08pQBgjxYFXSsODEF3Jqmm-y" target="_blank">YouTube playlist</a><span class="course-note">Intuition only: feedback, oscillation, overshoot, saturation.</span></div>
+          <div class="course-item"><span class="course-name">ROS2 image_pipeline / camera_calibration</span><a class="course-link" href="https://docs.ros.org/en/rolling/p/image_pipeline/" target="_blank">ROS docs</a><span class="course-note">Camera pipeline, CameraInfo, calibration trong ROS2.</span></div>
+          <div class="course-item"><span class="course-name">audio_common — ROS2 audio I/O</span><a class="course-link" href="https://github.com/ros-drivers/audio_common" target="_blank">GitHub</a><span class="course-note">ROS2 package chuẩn cho microphone input và speaker output. Dùng cùng Whisper node để build HRI voice pipeline.</span></div>
+          <div class="course-item"><span class="course-name">whisper_ros — Hugging Face Whisper trong ROS2</span><a class="course-link" href="https://github.com/mgonzs13/whisper_ros" target="_blank">GitHub</a><span class="course-note">Wrap Whisper thành ROS2 node publish text transcript. Kiến trúc đã học ở 2C-Audio — phase này chỉ deploy và đo latency.</span></div>
+        </div>
+      </details>
+      <div class="ratio-row"><span class="ratio-badge ratio-bot">Core Build Path</span><span class="ratio-badge ratio-bot">CPU ổn định + GPU nhẹ inference</span><span class="ratio-badge ratio-lang">HRI Voice: xây trên 2C-Audio</span></div>
+    </div>
+  </details>
+
+  <!-- ══ PHASE 6 ══ -->
+  <details class="phase ph6" id="ph6">
+    <summary class="phase-head">
+      <span class="phase-badge">Phase 6</span>
+      <span class="phase-title">Advanced: VLA, World Models &amp; Scaling</span>
+      <span class="phase-meta">6–8 tháng</span>
+      <span class="phase-output">Output: VLA hoặc World Model experiment + language-conditioned demo.</span>
+      <span class="toggle-icon">▶</span>
+    </summary>
+    <div class="phase-body">
+      <div class="project-hero"><div class="project-icon">🤖</div><div><div class="project-label">Goal</div><div class="project-name">Tiến tới VLA và World Models — công nghệ gần Baymax nhất hiện nay</div><div class="project-desc">Đây là advanced research phase. Kết hợp tất cả: Vision (2A) + Language (2B) + Multimodal (2C) + Generative (3) + Policy (4) + System (5) thành VLA và World Model. Không bắt đầu nếu Phase 4–5 chưa có demo system ổn.</div></div></div>
+      <div class="warn"><strong>⚠️ Compute warning:</strong> Phase này cần GPU đáng kể. Fine-tune OpenVLA cần ít nhất 1×A100 40GB hoặc tương đương. Eval/inference nhẹ hơn nhưng vẫn cần 24GB+ VRAM. Cân nhắc dùng Lambda Labs, RunPod, hoặc Google Colab Pro+. <strong>Nếu không có GPU lớn:</strong> vẫn hoàn thành được bằng cách trace code + chạy inference-only + viết analysis report — đây vẫn tính là pass criteria.</div>
+      <div class="col-grid">
+        <div class="col"><div class="col-title">Skills — VLA</div><ul class="skill-list"><li>VLA architecture: vision encoder + LLM backbone + action decoder</li><li>RT-2: tokenize actions, fine-tune VLM for robot control</li><li>OpenVLA: open-source VLA, trace codebase</li><li>π₀: Flow Matching policy với VLM conditioning</li><li><strong>Foundation Models: Octo, HPT — generalist robot policy, cross-embodiment</strong></li><li>Language-conditioned policy: instruction + image → action</li><li>Cross-embodiment: policy transfer giữa robot forms</li></ul></div>
+        <div class="col"><div class="col-title">Skills — World Models</div><ul class="skill-list"><li>Video prediction: predict next frames từ observation + action</li><li>Latent world models: Dreamer architecture, JEPA concept</li><li>Model-based planning: dùng world model để chọn action</li><li>Self-supervised representation: R3M, MVP, VC-1</li><li><strong>3D spatial basics: PointNet concept, NeRF/3DGS awareness</strong></li><li><strong>Tactile for manipulation: force feedback, compliance, safe grasping</strong></li></ul></div>
+        <div class="col"><div class="col-title">Pass Criteria</div><ul class="skill-list"><li>Fine-tune hoặc eval OpenVLA/π₀ trên task nhỏ</li><li>Language-conditioned policy: train policy follow text instruction</li><li>Implement world model toy (predict next state/frame)</li><li>So sánh non-language vs language-conditioned policy</li><li>Workshop-style report với compute budget và limitation</li></ul></div>
+      </div>
+      <div class="checkpoint"><div class="col-title">Research Tracks</div><ul class="skill-list"><li><strong>Track A — VLA:</strong> trace OpenVLA/π₀ codebase → fine-tune trên task nhỏ → language-conditioned eval.</li><li><strong>Track B — World Model:</strong> implement video prediction nhỏ → Dreamer concept → model-based planning toy.</li><li><strong>Track C — Integration:</strong> nối VLA + system (Phase 5) thành demo language-conditioned robot.</li></ul></div>
+      <details class="phase-resources">
+        <summary class="resources-toggle"><span class="col-title">Tài liệu</span><span class="res-count">8 nguồn</span><span class="toggle-icon">▶</span></summary>
+        <div class="resources-body">
+          <div class="course-item"><span class="course-name">Sergey Levine — OpenVLA talk</span><a class="course-link" href="https://www.youtube.com/watch?v=UpBuEAbGRFM" target="_blank">YouTube</a><span class="course-note">VLA overview và motivation.</span></div>
+          <div class="course-item"><span class="course-name">π₀ paper (Physical Intelligence, 2024)</span><a class="course-link" href="https://www.physicalintelligence.company/blog/pi0" target="_blank">Blog + paper</a><span class="course-note">Flow Matching + VLM cho robot policy.</span></div>
+          <div class="course-item"><span class="course-name">RT-2 paper (Google DeepMind, 2023)</span><a class="course-link" href="https://arxiv.org/abs/2307.15818" target="_blank">arXiv</a><span class="course-note">VLM backbone cho robot control.</span></div>
+          <div class="course-item"><span class="course-name">Octo: An Open-Source Generalist Robot Policy</span><a class="course-link" href="https://octo-models.github.io/" target="_blank">Project page</a><span class="course-note">Foundation model cho robot — cross-embodiment, fine-tunable.</span></div>
+          <div class="course-item"><span class="course-name">Open X-Embodiment dataset (RT-X)</span><a class="course-link" href="https://arxiv.org/abs/2310.08864" target="_blank">arXiv</a><span class="course-note">Large-scale robot data: scaling laws cho robot learning.</span></div>
+          <div class="course-item"><span class="course-name">Dreamer V3 paper</span><a class="course-link" href="https://arxiv.org/abs/2301.04104" target="_blank">arXiv</a><span class="course-note">State-of-the-art latent world model.</span></div>
+          <div class="course-item"><span class="course-name">Yann LeCun: JEPA and World Models</span><a class="course-link" href="https://www.youtube.com/watch?v=DokLw1tILlw" target="_blank">YouTube</a><span class="course-note">Vision cho predictive world models.</span></div>
+          <div class="course-item"><span class="course-name">LeRobot policies (ACT/modern)</span><a class="course-link" href="https://huggingface.co/docs/lerobot/index" target="_blank">Docs</a><span class="course-note">Implementation path cho advanced policies.</span></div>
+        </div>
+      </details>
+      <div class="ratio-row"><span class="ratio-badge ratio-adv">Advanced Research Path</span><span class="ratio-badge ratio-ai">Thuê GPU theo project</span></div>
+    </div>
+  </details>
+
+  <!-- ══ PHASE 7 ══ -->
+  <details class="phase ph7" id="ph7">
+    <summary class="phase-head">
+      <span class="phase-badge">Phase 7</span>
+      <span class="phase-title">Research Portfolio &amp; Polish</span>
+      <span class="phase-meta">ongoing</span>
+      <span class="phase-output">Output: polished repo + demo video + report + reproducibility note.</span>
+      <span class="toggle-icon">▶</span>
+    </summary>
+    <div class="phase-body">
+      <div class="project-hero"><div class="project-icon">🎓</div><div><div class="project-label">Goal</div><div class="project-name">Đóng gói demo thành portfolio research/apply được</div><div class="project-desc">Phase này không thêm nhiều skill mới. Chỉ bắt đầu sau khi đã có demo hoặc system nhỏ ổn định. Trọng tâm là README, report, demo video, reproducibility note và contribution.</div></div></div>
+      <div class="col-grid">
+        <div class="col"><div class="col-title">Skills</div><ul class="skill-list"><li>README technical rõ ràng</li><li>Experiment report gần chuẩn workshop</li><li>Paper reading routine có chọn lọc</li><li>Open-source issue/bugfix/docs contribution</li><li>Demo video và reproducibility guide</li></ul></div>
+        <div class="col"><div class="col-title">Tools</div><ul class="skill-list"><li>GitHub Projects/Issues</li><li>arXiv, Papers with Code</li><li>Markdown, LaTeX optional</li><li>LeRobot/OpenVLA/Diffusion Policy repos</li></ul></div>
+        <div class="col"><div class="col-title">Pass Criteria</div><ul class="skill-list"><li>1 repo polished end-to-end</li><li>1 demo video ngắn</li><li>1 report gần chuẩn workshop paper</li><li>1 reproducibility note hoặc open-source contribution</li></ul></div>
+      </div>
+      <details class="phase-resources">
+        <summary class="resources-toggle"><span class="col-title">Tài liệu</span><span class="res-count">3 nguồn</span><span class="toggle-icon">▶</span></summary>
+        <div class="resources-body">
+          <div class="course-item"><span class="course-name">Papers with Code</span><a class="course-link" href="https://paperswithcode.com/" target="_blank">Website</a><span class="course-note">Tra benchmark/codebase, không đọc lan man.</span></div>
+          <div class="course-item"><span class="course-name">Yannic Kilcher — paper reading channel</span><a class="course-link" href="https://www.youtube.com/@YannicKilcher" target="_blank">YouTube channel</a><span class="course-note">Dùng để hỗ trợ đọc paper, không thay thế implementation.</span></div>
+          <div class="course-item"><span class="course-name">Simon Peyton Jones — How to Write a Great Research Paper</span><a class="course-link" href="https://www.youtube.com/watch?v=g3dkRsTqdDA" target="_blank">YouTube</a><span class="course-note">Dùng khi viết report cuối.</span></div>
+        </div>
+      </details>
+      <div class="ratio-row"><span class="ratio-badge ratio-adv">Advanced Research Path</span></div>
+    </div>
+  </details>
+
+  <div class="footer">
+    <strong>Roadmap v8.9.0 — Current Version Summary.</strong>
+    Bản hiện tại là một roadmap AI-first cho Embodied Robot Learning, tập trung vào Brain → Body: từ workflow nền tảng, Deep Learning/math, Vision, Language, Multimodal Fusion (Vision-Language + Audio-Language), Generative Policy, Robot Learning, System Integration đến VLA/World Models và Portfolio.
+    <strong>v8.9.0 — Audio-Language Fusion:</strong> Phase 2C mở rộng thành 2 sub-phase: 2C-VL (Vision-Language, giữ nguyên nội dung 8.8.x) và 2C-Audio (Audio signal representation, Whisper/Wav2Vec architecture, TTS pipeline, cascaded vs end-to-end Audio-LLM, Audio Tokens concept). Thời lượng 2C tăng từ 1–2 tháng lên 2–3 tháng. Tổng Core Build Path không thay đổi vì phần mở rộng nằm trong khoảng dự phòng. Phase 5 nâng phần Audio/Speech từ "black-box overview" lên "HRI Voice Pipeline" với kiến trúc ROS2 node thực, tham chiếu kiến thức từ 2C-Audio.
+    Giao diện gồm View Mode top-bar sticky ở mép trên, Visual Roadmap Map có node click được, Quick Reference, phase cards chi tiết, và checklist tiến độ cho Skills / Tools / Pass Criteria, lưu/nạp bằng file TXT thay vì browser storage.
+    Các View Mode hiện có: Overview để xem Roadmap Compass, Visual Roadmap Map và Read this first; Build Path để xem phase cards; Math để lọc phần toán gốc rễ; Resources để xem tài liệu; Full để xem toàn bộ cấu trúc.
+    Roadmap Compass, Visual Roadmap Map và Read this first chỉ xuất hiện trong Overview và Full. Overview không hiển thị phase details; tất cả khối collapsible như Read this first, Quick Reference, phase details và resources đều mặc định đóng để giảm việc phải lướt qua nội dung dài. Checklist không lưu bằng localStorage. Nếu cần giữ tiến độ giữa các lần mở, dùng khối Quản lý file tiến độ trong Build Path hoặc Full để nạp / xuất file TXT.
+  </div>
+
+</div>
+
+<script defer src="app.js"></script>
+</body>
+</html>

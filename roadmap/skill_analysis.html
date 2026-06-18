@@ -1,0 +1,880 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Skill Coverage — Roadmap v8.9.0</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@300;400;500;600&display=swap');
+
+*{box-sizing:border-box;margin:0;padding:0}
+
+:root{
+  --bg:#f5f4f0;
+  --surface:#ffffff;
+  --surface2:#fafaf8;
+  --border:rgba(0,0,0,.085);
+  --border2:#e0dcd3;
+  --green:#0f6e56;
+  --green-dim:#e1f5ee;
+  --amber:#d97706;
+  --amber-dim:#fef3c7;
+  --red:#b91c1c;
+  --red-dim:#fee2e2;
+  --blue:#185fa5;
+  --text:#1a1a1a;
+  --text-mid:#76736e;
+  --text-dim:#aaa49a;
+  --mono:'IBM Plex Mono',monospace;
+  --sans:'IBM Plex Sans',system-ui,sans-serif;
+}
+
+body{
+  font-family:var(--sans);
+  background:var(--bg);
+  color:var(--text);
+  min-height:100vh;
+  line-height:1.6;
+}
+
+/* ── LAYOUT ── */
+.shell{max-width:1100px;margin:0 auto;padding:2rem 1.5rem 4rem}
+
+/* ── HEADER ── */
+.page-header{
+  border-bottom:1px solid var(--border);
+  padding-bottom:1.5rem;
+  margin-bottom:2rem;
+  display:flex;
+  align-items:flex-start;
+  justify-content:space-between;
+  gap:2rem;
+  flex-wrap:wrap;
+}
+.eyebrow{
+  font-family:var(--mono);
+  font-size:10px;
+  letter-spacing:.12em;
+  text-transform:uppercase;
+  color:var(--green);
+  margin-bottom:6px;
+}
+.page-header h1{
+  font-size:22px;
+  font-weight:600;
+  color:var(--text);
+  line-height:1.2;
+  margin-bottom:8px;
+}
+.page-header p{
+  font-size:12.5px;
+  color:var(--text-mid);
+  max-width:600px;
+  line-height:1.7;
+}
+.header-right{
+  display:flex;
+  flex-direction:column;
+  align-items:flex-end;
+  gap:6px;
+  flex-shrink:0;
+}
+.version-pill{
+  font-family:var(--mono);
+  font-size:11px;
+  background:var(--green-dim);
+  color:var(--green);
+  border:1px solid var(--green-dim);
+  padding:3px 10px;
+  border-radius:20px;
+}
+.timestamp{font-family:var(--mono);font-size:10px;color:var(--text-dim)}
+
+/* ── 2-COLUMN GRID ── */
+.main-grid{
+  display:grid;
+  grid-template-columns:1fr 340px;
+  gap:1.5rem;
+  align-items:start;
+}
+
+/* ── SECTION LABEL ── */
+.section-label{
+  font-family:var(--mono);
+  font-size:9.5px;
+  letter-spacing:.1em;
+  text-transform:uppercase;
+  color:var(--text-dim);
+  margin-bottom:10px;
+  padding-bottom:6px;
+  border-bottom:1px solid var(--border);
+}
+
+/* ── RADAR PANEL ── */
+.radar-panel{
+  background:var(--surface);
+  border:1px solid var(--border);
+  border-radius:12px;
+  padding:1.25rem;
+  margin-bottom:1.5rem;
+}
+.radar-wrap{
+  display:flex;
+  gap:1.5rem;
+  align-items:center;
+  flex-wrap:wrap;
+}
+.radar-svg{flex-shrink:0}
+.radar-legend{flex:1;min-width:160px}
+.legend-item{
+  display:flex;
+  align-items:center;
+  gap:8px;
+  margin-bottom:7px;
+  font-size:11.5px;
+  color:var(--text-mid);
+}
+.legend-dot{
+  width:8px;height:8px;border-radius:50%;flex-shrink:0;
+}
+.legend-pct{
+  font-family:var(--mono);
+  font-size:11px;
+  margin-left:auto;
+}
+.legend-pct.green{color:var(--green)}
+.legend-pct.amber{color:var(--amber)}
+.legend-pct.red{color:var(--red)}
+
+/* ── SKILL ROWS ── */
+.skill-list-panel{
+  background:var(--surface);
+  border:1px solid var(--border);
+  border-radius:12px;
+  overflow:hidden;
+}
+.skill-row{
+  display:grid;
+  grid-template-columns:1fr 44px;
+  align-items:center;
+  gap:10px;
+  padding:10px 14px;
+  border-bottom:1px solid var(--border);
+  transition:background .15s;
+  cursor:default;
+}
+.skill-row:last-child{border-bottom:none}
+.skill-row:hover{background:var(--surface2)}
+.skill-name{
+  font-size:12.5px;
+  font-weight:500;
+  color:var(--text);
+  margin-bottom:5px;
+}
+.skill-name .new-tag{
+  font-family:var(--mono);
+  font-size:9px;
+  background:var(--green-dim);
+  color:var(--green);
+  padding:1px 5px;
+  border-radius:3px;
+  margin-left:6px;
+  vertical-align:middle;
+}
+.skill-name .updated-tag{
+  font-family:var(--mono);
+  font-size:9px;
+  background:var(--amber-dim);
+  color:var(--amber);
+  padding:1px 5px;
+  border-radius:3px;
+  margin-left:6px;
+  vertical-align:middle;
+}
+.bar-track{
+  height:4px;
+  background:var(--border2);
+  border-radius:2px;
+  overflow:hidden;
+  position:relative;
+  margin-bottom:5px;
+}
+.bar-fill{
+  height:100%;
+  border-radius:2px;
+}
+.bar-old{
+  height:100%;
+  border-radius:2px;
+  position:absolute;
+  top:0;left:0;
+  background:var(--text-dim);
+  opacity:.4;
+}
+.skill-note-mini{
+  font-size:10.5px;
+  color:var(--text-dim);
+  line-height:1.5;
+}
+.skill-pct-badge{
+  font-family:var(--mono);
+  font-size:13px;
+  font-weight:600;
+  text-align:right;
+  line-height:1;
+}
+
+/* ── DETAIL DRAWER (toggle) ── */
+.skill-detail{
+  background:var(--bg);
+  padding:10px 14px 12px;
+  border-bottom:1px solid var(--border);
+  font-size:11.5px;
+  color:var(--text-mid);
+  line-height:1.65;
+  display:none;
+}
+.skill-detail.open{display:block}
+.skill-detail .d-gap{color:var(--red);font-size:11px;margin-top:6px}
+.skill-detail .d-new{color:var(--green);font-size:11px;margin-top:4px}
+.expand-hint{font-size:9.5px;color:var(--text-dim);font-family:var(--mono);cursor:pointer}
+.skill-row.active-row{background:var(--surface2)}
+
+/* ── RIGHT COLUMN ── */
+
+/* Milestone card */
+.milestone-card{
+  background:var(--surface);
+  border:1px solid var(--border);
+  border-radius:12px;
+  padding:1.25rem;
+  margin-bottom:1.5rem;
+}
+.ms-phase{
+  font-family:var(--mono);
+  font-size:9px;
+  letter-spacing:.1em;
+  text-transform:uppercase;
+  color:var(--amber);
+  margin-bottom:4px;
+}
+.ms-title{
+  font-size:14px;
+  font-weight:600;
+  color:var(--text);
+  margin-bottom:10px;
+}
+.ms-chips{display:flex;flex-wrap:wrap;gap:5px;margin-bottom:10px}
+.chip{
+  font-size:10px;
+  padding:2px 8px;
+  border-radius:4px;
+  font-family:var(--mono);
+}
+.chip.have{background:var(--green-dim);color:var(--green)}
+.chip.miss{background:var(--surface2);color:var(--text-dim)}
+.ms-legend{display:flex;gap:12px;font-size:10.5px;color:var(--text-dim)}
+.ms-legend span{display:flex;align-items:center;gap:4px}
+.ms-legend .dot-g{width:6px;height:6px;border-radius:50%;background:var(--green);display:inline-block}
+.ms-legend .dot-m{width:6px;height:6px;border-radius:50%;background:var(--text-dim);display:inline-block}
+
+/* Info bar */
+.info-card{
+  background:color-mix(in srgb, var(--blue) 8%, var(--surface));
+  border:1px solid color-mix(in srgb, var(--blue) 25%, var(--border));
+  border-radius:10px;
+  padding:12px 14px;
+  font-size:11.5px;
+  color:var(--text-mid);
+  line-height:1.65;
+  margin-bottom:1.5rem;
+}
+.info-card strong{color:var(--blue)}
+
+/* ── JOB CARDS ── */
+.job-section-label{
+  font-family:var(--mono);
+  font-size:9px;
+  letter-spacing:.1em;
+  text-transform:uppercase;
+  color:var(--text-dim);
+  margin:1.5rem 0 8px;
+  padding-bottom:6px;
+  border-bottom:1px solid var(--border);
+}
+.job-grid{display:flex;flex-direction:column;gap:8px;margin-bottom:0}
+
+.job-card{
+  background:var(--surface);
+  border:1px solid var(--border);
+  border-radius:10px;
+  padding:12px 14px;
+  position:relative;
+  transition:border-color .15s;
+}
+.job-card:hover{border-color:var(--border2)}
+.job-card-head{display:flex;align-items:flex-start;justify-content:space-between;gap:8px;margin-bottom:6px}
+.job-title-text{font-size:12.5px;font-weight:600;color:var(--text)}
+.job-badge{
+  font-family:var(--mono);
+  font-size:9px;
+  padding:2px 7px;
+  border-radius:3px;
+  white-space:nowrap;
+  flex-shrink:0;
+}
+.badge-g{background:var(--green-dim);color:var(--green)}
+.badge-a{background:var(--amber-dim);color:var(--amber)}
+.badge-r{background:var(--red-dim);color:var(--red)}
+.job-co{font-size:10.5px;color:var(--text-dim);margin-bottom:6px}
+.job-tags{display:flex;flex-wrap:wrap;gap:4px;margin-bottom:7px}
+.jtag{font-size:9.5px;font-family:var(--mono);background:var(--surface2);color:var(--text-mid);padding:2px 6px;border-radius:3px}
+.job-salary{font-family:var(--mono);font-size:10.5px;color:var(--blue);margin-bottom:5px}
+.job-note{font-size:10.5px;color:var(--text-dim);line-height:1.55}
+
+/* ── SUMMARY TABLE ── */
+.summary-wrap{
+  grid-column:1/-1;
+  margin-top:1rem;
+}
+.tbl-scroll{overflow-x:auto}
+table{
+  width:100%;
+  border-collapse:collapse;
+  background:var(--surface);
+  border:1px solid var(--border);
+  border-radius:12px;
+  overflow:hidden;
+  font-size:11.5px;
+}
+th{
+  background:var(--surface2);
+  font-family:var(--mono);
+  font-size:9.5px;
+  letter-spacing:.06em;
+  text-transform:uppercase;
+  color:var(--text-dim);
+  padding:10px 12px;
+  text-align:left;
+  border-bottom:1px solid var(--border);
+  white-space:nowrap;
+}
+td{
+  padding:9px 12px;
+  border-bottom:1px solid var(--border);
+  vertical-align:top;
+  color:var(--text-mid);
+}
+tr:last-child td{border-bottom:none}
+tr:hover td{background:var(--surface2)}
+td:first-child{color:var(--text);font-weight:500}
+.pct-g{font-family:var(--mono);color:var(--green);font-weight:600}
+.pct-a{font-family:var(--mono);color:var(--amber);font-weight:600}
+.pct-r{font-family:var(--mono);color:var(--red);font-weight:500}
+.pct-dim{font-family:var(--mono);color:var(--text-dim)}
+.delta-g{font-family:var(--mono);color:var(--green);font-size:11px}
+.delta-n{font-family:var(--mono);color:var(--text-dim);font-size:11px}
+
+/* ── WARN/FOOTER ── */
+.footer-notes{
+  grid-column:1/-1;
+  margin-top:1rem;
+  display:flex;
+  flex-direction:column;
+  gap:10px;
+}
+.warn-bar{
+  background:color-mix(in srgb, var(--amber) 8%, var(--surface));
+  border:1px solid color-mix(in srgb, var(--amber) 20%, var(--border));
+  border-radius:10px;
+  padding:12px 14px;
+  font-size:11.5px;
+  color:var(--text-mid);
+  line-height:1.6;
+}
+.warn-bar strong{color:var(--amber)}
+.note-bar{
+  background:var(--surface);
+  border:1px solid var(--border);
+  border-radius:10px;
+  padding:12px 14px;
+  font-size:11px;
+  color:var(--text-dim);
+  line-height:1.65;
+}
+.note-bar strong{color:var(--text-mid)}
+
+/* ── RESPONSIVE ── */
+@media(max-width:820px){
+  .main-grid{grid-template-columns:1fr}
+  .right-col{order:-1}
+  .radar-wrap{flex-direction:column;align-items:flex-start}
+  .page-header{flex-direction:column;gap:10px}
+  .header-right{align-items:flex-start}
+}
+</style>
+</head>
+<body>
+<div class="shell">
+
+<!-- HEADER -->
+<header class="page-header">
+  <div class="header-left">
+    <div class="eyebrow">Skill Coverage Report · Roadmap v8.9.0</div>
+    <h1>Tại thời điểm đủ sức tìm việc<br><span style="color:var(--text-mid);font-weight:300">Brain-centric · Vision-Language-Audio-Action</span></h1>
+    <p>% skill sau khi hoàn thành Phase 0–5, đối chiếu với yêu cầu thị trường Việt Nam 2025–2026. v8.9.0 bổ sung 2C-Audio (Mel-Spectrogram, Whisper architecture, TTS, Audio Tokens) — mở khoá HRI / Voice AI Engineer.</p>
+  </div>
+  <div class="header-right">
+    <span class="version-pill">v8.9.0</span>
+    <span class="timestamp">6/2026 · ITviec · TopCV · VietnamWorks</span>
+  </div>
+</header>
+
+<div class="main-grid">
+
+  <!-- ══ LEFT COLUMN ══ -->
+  <div class="left-col">
+
+    <!-- Radar -->
+    <div class="radar-panel">
+      <div class="section-label">Radar — 11 skill domains</div>
+      <div class="radar-wrap">
+        <svg class="radar-svg" viewBox="0 0 220 220" width="220" height="220">
+          <defs>
+            <filter id="glow"><feGaussianBlur stdDeviation="2.5" result="coloredBlur"/><feMerge><feMergeNode in="coloredBlur"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+          </defs>
+          <!-- Grid rings -->
+          <g stroke="var(--border2)" stroke-width="1" fill="none">
+            <polygon points="110,20 188,65 188,155 110,200 32,155 32,65" opacity=".4"/>
+            <polygon points="110,42.5 170.5,73.75 170.5,136.25 110,167.5 49.5,136.25 49.5,73.75" opacity=".4"/>
+            <polygon points="110,65 153,82.5 153,117.5 110,135 67,117.5 67,82.5" opacity=".4"/>
+            <polygon points="110,87.5 135.5,91.25 135.5,98.75 110,102.5 84.5,98.75 84.5,91.25" opacity=".3"/>
+          </g>
+          <!-- Axis lines -->
+          <g stroke="var(--border)" stroke-width=".8">
+            <line x1="110" y1="110" x2="110" y2="20"/>
+            <line x1="110" y1="110" x2="188" y2="65"/>
+            <line x1="110" y1="110" x2="188" y2="155"/>
+            <line x1="110" y1="110" x2="110" y2="200"/>
+            <line x1="110" y1="110" x2="32" y2="155"/>
+            <line x1="110" y1="110" x2="32" y2="65"/>
+          </g>
+          <!-- v8.8 old area (6-point approximation of 11 skills, condensed to hex) -->
+          <polygon
+            points="110,38 170,76 165,140 110,172 58,145 48,72"
+            fill="var(--green)" fill-opacity=".05" stroke="var(--green)" stroke-width=".8" stroke-dasharray="3,3" opacity=".6"/>
+          <!-- v8.9 filled area -->
+          <polygon
+            points="110,30 173,70 168,143 110,175 50,148 44,68"
+            fill="var(--green)" fill-opacity=".15" stroke="var(--green)" stroke-width="1.5" filter="url(#glow)"/>
+          <!-- Axis labels -->
+          <text x="110" y="14" text-anchor="middle" font-size="8" fill="var(--text-mid)" font-family="IBM Plex Mono,monospace">Python/ML</text>
+          <text x="196" y="62" text-anchor="start" font-size="8" fill="var(--text-mid)" font-family="IBM Plex Mono,monospace">Deep Learning</text>
+          <text x="196" y="158" text-anchor="start" font-size="8" fill="var(--text-mid)" font-family="IBM Plex Mono,monospace">Imitation RL</text>
+          <text x="110" y="212" text-anchor="middle" font-size="8" fill="var(--amber)" font-family="IBM Plex Mono,monospace">Audio/HRI ★</text>
+          <text x="22" y="158" text-anchor="end" font-size="8" fill="var(--text-mid)" font-family="IBM Plex Mono,monospace">ROS2</text>
+          <text x="22" y="62" text-anchor="end" font-size="8" fill="var(--text-mid)" font-family="IBM Plex Mono,monospace">VLM</text>
+          <!-- Center dot -->
+          <circle cx="110" cy="110" r="2.5" fill="var(--green)"/>
+        </svg>
+        <div class="radar-legend">
+          <div class="legend-item"><span class="legend-dot" style="background:var(--green)"></span>Python / ML Eng<span class="legend-pct green">92%</span></div>
+          <div class="legend-item"><span class="legend-dot" style="background:var(--green)"></span>Deep Learning<span class="legend-pct green">88%</span></div>
+          <div class="legend-item"><span class="legend-dot" style="background:var(--green)"></span>Computer Vision<span class="legend-pct green">75%</span></div>
+          <div class="legend-item"><span class="legend-dot" style="background:var(--green)"></span>NLP / LLM<span class="legend-pct green">72%</span></div>
+          <div class="legend-item"><span class="legend-dot" style="background:var(--green)"></span>VLM / Multimodal<span class="legend-pct green">80%</span></div>
+          <div class="legend-item"><span class="legend-dot" style="background:var(--amber)"></span>Audio / Speech ★<span class="legend-pct amber">55%</span></div>
+          <div class="legend-item"><span class="legend-dot" style="background:var(--green)"></span>Generative Models<span class="legend-pct green">78%</span></div>
+          <div class="legend-item"><span class="legend-dot" style="background:var(--green)"></span>Imitation / RL<span class="legend-pct green">82%</span></div>
+          <div class="legend-item"><span class="legend-dot" style="background:var(--green)"></span>Reinforcement Learning<span class="legend-pct green">65%</span></div>
+          <div class="legend-item"><span class="legend-dot" style="background:var(--amber)"></span>ROS2 / HRI<span class="legend-pct amber">72%</span></div>
+          <div class="legend-item"><span class="legend-dot" style="background:var(--red)"></span>CUDA / C++ / SLAM<span class="legend-pct red">≤35%</span></div>
+          <div style="margin-top:10px;font-size:10px;color:var(--text-dim);font-family:'IBM Plex Mono',monospace">
+            <span style="color:var(--green);margin-right:6px">──</span>v8.9.0
+            <span style="color:var(--green);opacity:.4;margin-left:10px;margin-right:6px">- -</span>v8.8.x
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Skill rows -->
+    <div class="section-label">Chi tiết từng skill domain — click để mở rộng</div>
+    <div class="skill-list-panel" id="skillList">
+
+      <!-- Python -->
+      <div class="skill-row" onclick="toggleDetail('d-py',this)">
+        <div class="skill-row-left">
+          <div class="skill-name">Python / ML Engineering</div>
+          <div class="bar-track">
+            <div class="bar-old" style="width:90%"></div>
+            <div class="bar-fill" style="width:92%;background:var(--green)"></div>
+          </div>
+          <div class="skill-note-mini">PyTorch · training loop · HF ecosystem · experiment infra <span class="expand-hint">▸ chi tiết</span></div>
+        </div>
+        <div class="skill-pct-badge" style="color:var(--green)">92%</div>
+      </div>
+      <div class="skill-detail" id="d-py">Nền vững từ trước + roadmap mở rộng sâu. PyTorch, training loop, experiment logging, checkpoint, config — đủ cho hầu hết job posting tại VN. v8 thêm Hugging Face Transformers ecosystem (Phase 2B/2C). v8.9 mở rộng thêm torchaudio và HF Audio pipeline.<div class="d-gap">Còn thiếu: production deployment, MLOps scale lớn, distributed training.</div></div>
+
+      <!-- Deep Learning -->
+      <div class="skill-row" onclick="toggleDetail('d-dl',this)">
+        <div class="skill-row-left">
+          <div class="skill-name">Deep Learning — math foundations</div>
+          <div class="bar-track">
+            <div class="bar-old" style="width:80%"></div>
+            <div class="bar-fill" style="width:88%;background:var(--green)"></div>
+          </div>
+          <div class="skill-note-mini">KL, ELBO, score matching · CNN + Transformer · ViT <span class="expand-hint">▸ chi tiết</span></div>
+        </div>
+        <div class="skill-pct-badge" style="color:var(--green)">88%</div>
+      </div>
+      <div class="skill-detail" id="d-dl">v8 tăng (+8%) nhờ bổ sung toán gốc rễ (KL divergence, entropy, ELBO) và Transformer cho cả vision lẫn language. Hiểu sâu tại sao loss được thiết kế như vậy. v8.9 thêm audio domain: tại sao Mel-Spectrogram, STFT window/hop.<div class="d-gap">Còn thiếu: distributed training kinh nghiệm, large model training infra.</div><div class="d-new">v8 mới: Information Theory, ELBO, causal vs bidirectional attention.</div></div>
+
+      <!-- CV -->
+      <div class="skill-row" onclick="toggleDetail('d-cv',this)">
+        <div class="skill-row-left">
+          <div class="skill-name">Computer Vision</div>
+          <div class="bar-track">
+            <div class="bar-old" style="width:75%"></div>
+            <div class="bar-fill" style="width:75%;background:var(--green)"></div>
+          </div>
+          <div class="skill-note-mini">CS231N · detection · segmentation · ViT · CLIP <span class="expand-hint">▸ chi tiết</span></div>
+        </div>
+        <div class="skill-pct-badge" style="color:var(--green)">75%</div>
+      </div>
+      <div class="skill-detail" id="d-cv">Giữ nguyên — CS231N cover CNN, detection, segmentation, ViT. CLIP deep dive chuyển sang 2C-VL nên overall không giảm. Đủ cho CV Engineer entry-level.<div class="d-gap">Còn thiếu: 3D vision, point cloud, depth estimation production-level.</div></div>
+
+      <!-- NLP -->
+      <div class="skill-row" onclick="toggleDetail('d-nlp',this)">
+        <div class="skill-row-left">
+          <div class="skill-name">NLP / LLM Foundations</div>
+          <div class="bar-track">
+            <div class="bar-old" style="width:10%"></div>
+            <div class="bar-fill" style="width:72%;background:var(--green)"></div>
+          </div>
+          <div class="skill-note-mini">tokenization · nanoGPT · LoRA fine-tuning · instruction tuning <span class="expand-hint">▸ chi tiết</span></div>
+        </div>
+        <div class="skill-pct-badge" style="color:var(--green)">72%</div>
+      </div>
+      <div class="skill-detail" id="d-nlp">Tăng mạnh nhất so với v7 — từ ~10% lên 72%. Phase 2B: tokenization (BPE), nanoGPT from scratch, autoregressive generation, fine-tuning (LoRA), instruction tuning concept.<div class="d-gap">Còn thiếu: RAG pipeline production, vLLM/TGI serving, RLHF production.</div><div class="d-new">v8 mới: tokenization, nanoGPT, causal attention, LLM fine-tuning.</div></div>
+
+      <!-- VLM -->
+      <div class="skill-row" onclick="toggleDetail('d-vlm',this)">
+        <div class="skill-row-left">
+          <div class="skill-name">VLM / Multimodal AI <span class="updated-tag">v8.9 +5%</span></div>
+          <div class="bar-track">
+            <div class="bar-old" style="width:75%"></div>
+            <div class="bar-fill" style="width:80%;background:var(--green)"></div>
+          </div>
+          <div class="skill-note-mini">CLIP · LLaVA · Flamingo · InfoNCE · Audio Tokens <span class="expand-hint">▸ chi tiết</span></div>
+        </div>
+        <div class="skill-pct-badge" style="color:var(--green)">80%</div>
+      </div>
+      <div class="skill-detail" id="d-vlm">v8.8: 75% — Vision-Language (CLIP, LLaVA, Flamingo, InfoNCE). v8.9: +5% nhờ Audio-Language Fusion (2C-Audio). Giờ biết đưa cả visual lẫn audio vào LLM pipeline. Hiểu cascaded vs end-to-end Audio-LLM, Audio Tokens/EnCodec concept.<div class="d-gap">Còn thiếu: end-to-end Audio-LLM production (Qwen-Audio), VLM serving pipeline, evaluation benchmark.</div><div class="d-new">v8.9 mới: Whisper encoder arch, Wav2Vec 2.0, TTS pipeline, Audio Tokens, cascaded vs E2E.</div></div>
+
+      <!-- Audio -->
+      <div class="skill-row" onclick="toggleDetail('d-audio',this)">
+        <div class="skill-row-left">
+          <div class="skill-name">Audio / Speech Models <span class="new-tag">v8.9 mới +45%</span></div>
+          <div class="bar-track">
+            <div class="bar-old" style="width:10%"></div>
+            <div class="bar-fill" style="width:55%;background:var(--amber)"></div>
+          </div>
+          <div class="skill-note-mini">Mel-Spectrogram · Whisper arch · TTS pipeline · Audio Tokens · HRI ROS2 <span class="expand-hint">▸ chi tiết</span></div>
+        </div>
+        <div class="skill-pct-badge" style="color:var(--amber)">55%</div>
+      </div>
+      <div class="skill-detail" id="d-audio">v8.8: ~10% (Whisper black box). v8.9: 55% nhờ sub-phase 2C-Audio. Hiểu: Mel-Spectrogram (tại sao không feed raw waveform), Whisper CNN+Transformer Encoder-Decoder (trace tensor shape), Wav2Vec 2.0 self-supervised, TTS pipeline (text→phoneme→acoustic model→vocoder), Audio Tokens/EnCodec. Build được cascaded HRI voice demo ROS2.<div class="d-gap">Còn thiếu: ASR fine-tune tiếng Việt scale lớn, end-to-end Audio-LLM training, vocoder design.</div><div class="d-new">v8.9 mới hoàn toàn: STFT, Mel-Spectrogram, Whisper arch, Wav2Vec, Coqui TTS, Audio Tokens, HRI voice loop.</div></div>
+
+      <!-- Generative -->
+      <div class="skill-row" onclick="toggleDetail('d-gen',this)">
+        <div class="skill-row-left">
+          <div class="skill-name">Generative Models</div>
+          <div class="bar-track">
+            <div class="bar-old" style="width:5%"></div>
+            <div class="bar-fill" style="width:78%;background:var(--green)"></div>
+          </div>
+          <div class="skill-note-mini">VAE · DDPM · score matching · Flow Matching <span class="expand-hint">▸ chi tiết</span></div>
+        </div>
+        <div class="skill-pct-badge" style="color:var(--green)">78%</div>
+      </div>
+      <div class="skill-detail" id="d-gen">Mới hoàn toàn trong v8. Phase 3: VAE/CVAE (ELBO, reparameterization), DDPM (denoising objective, noise schedule), score-based modeling, Flow Matching basics. Implement VAE + DDPM from scratch — nền tảng toán cho ACT, Diffusion Policy, π₀.<div class="d-gap">Còn thiếu: large-scale generative training, conditional generation scale lớn.</div><div class="d-new">v8 mới: ELBO derivation, DDPM implement, score matching, Flow Matching concept.</div></div>
+
+      <!-- Imitation -->
+      <div class="skill-row" onclick="toggleDetail('d-il',this)">
+        <div class="skill-row-left">
+          <div class="skill-name">Imitation Learning / Robot Learning</div>
+          <div class="bar-track">
+            <div class="bar-old" style="width:75%"></div>
+            <div class="bar-fill" style="width:82%;background:var(--green)"></div>
+          </div>
+          <div class="skill-note-mini">BC · ACT · Diffusion Policy · sim-to-real · domain rand <span class="expand-hint">▸ chi tiết</span></div>
+        </div>
+        <div class="skill-pct-badge" style="color:var(--green)">82%</div>
+      </div>
+      <div class="skill-detail" id="d-il">Tăng nhờ v8 có nền generative vững trước khi học ACT/Diffusion Policy. Hiểu tại sao ACT dùng CVAE, tại sao Diffusion Policy dùng DDPM. So sánh BC vs ACT vs Diffusion Policy. Thêm sim-to-real basics, domain randomization.<div class="d-gap">Còn thiếu: dataset robot thật, VLA, cross-embodiment.</div></div>
+
+      <!-- RL -->
+      <div class="skill-row" onclick="toggleDetail('d-rl',this)">
+        <div class="skill-row-left">
+          <div class="skill-name">Reinforcement Learning</div>
+          <div class="bar-track">
+            <div class="bar-old" style="width:45%"></div>
+            <div class="bar-fill" style="width:65%;background:var(--green)"></div>
+          </div>
+          <div class="skill-note-mini">REINFORCE · PPO basics · Spinning Up <span class="expand-hint">▸ chi tiết</span></div>
+        </div>
+        <div class="skill-pct-badge" style="color:var(--green)">65%</div>
+      </div>
+      <div class="skill-detail" id="d-rl">v8 thêm Policy Gradient (REINFORCE) và PPO basics, OpenAI Spinning Up. Implement được REINFORCE, hiểu PPO clipped objective, advantage estimation.<div class="d-gap">Còn thiếu: SAC, offline RL, model-based RL, distributed rollout, reward engineering phức tạp.</div></div>
+
+      <!-- ROS2 -->
+      <div class="skill-row" onclick="toggleDetail('d-ros',this)">
+        <div class="skill-row-left">
+          <div class="skill-name">ROS2 / HRI Voice Pipeline <span class="updated-tag">v8.9 +4%</span></div>
+          <div class="bar-track">
+            <div class="bar-old" style="width:68%"></div>
+            <div class="bar-fill" style="width:72%;background:var(--amber)"></div>
+          </div>
+          <div class="skill-note-mini">Node · TF2 · PID · safety · Whisper ROS2 node · latency budget <span class="expand-hint">▸ chi tiết</span></div>
+        </div>
+        <div class="skill-pct-badge" style="color:var(--amber)">72%</div>
+      </div>
+      <div class="skill-detail" id="d-ros">v8.8: 68% — Articulated Robotics, Henki, Brian Douglas PID, safety checklist. v8.9: +4% nhờ HRI Voice Pipeline thực: deploy Whisper ROS2 node, audio_common, TTS integration, đo latency budget cho voice loop.<div class="d-gap">Còn thiếu: ROS2 C++ production, navigation stack, multi-robot system.</div><div class="d-new">v8.9: Whisper ROS2 node, audio_common, TTS, latency measurement.</div></div>
+
+      <!-- Low-level -->
+      <div class="skill-row" onclick="toggleDetail('d-low',this)">
+        <div class="skill-row-left">
+          <div class="skill-name">C++ / CUDA / SLAM</div>
+          <div class="bar-track">
+            <div class="bar-old" style="width:30%"></div>
+            <div class="bar-fill" style="width:30%;background:var(--red)"></div>
+          </div>
+          <div class="skill-note-mini">Không phải định hướng — Brain-centric Python track <span class="expand-hint">▸ chi tiết</span></div>
+        </div>
+        <div class="skill-pct-badge" style="color:var(--red)">≤35%</div>
+      </div>
+      <div class="skill-detail" id="d-low">Có ý định: đọc được ROS2 C++ code, hiểu SLAM concept. Không cover production-level. Brain-centric track chủ yếu dùng Python — đây là thiếu sót có chủ ý. CUDA/TensorRT/ONNX gần như 0%.<div class="d-gap">Cần bổ sung nếu apply Robotics SWE, ML Systems Engineer, Edge AI.</div></div>
+
+    </div><!-- /skill-list-panel -->
+
+  </div><!-- /left-col -->
+
+  <!-- ══ RIGHT COLUMN ══ -->
+  <div class="right-col">
+
+    <!-- Milestone -->
+    <div class="section-label">Mốc đánh giá — Phase 0 → 5</div>
+    <div class="milestone-card">
+      <div class="ms-phase">Hoàn thành Core Build Path · ~22–28 tháng</div>
+      <div class="ms-title">Thời điểm đủ sức tìm việc</div>
+      <div class="ms-chips">
+        <span class="chip have">Python / PyTorch</span>
+        <span class="chip have">Deep Learning</span>
+        <span class="chip have">Computer Vision</span>
+        <span class="chip have">NLP / LLM</span>
+        <span class="chip have">VLM / CLIP</span>
+        <span class="chip have">Audio arch ★</span>
+        <span class="chip have">VAE + DDPM</span>
+        <span class="chip have">ACT / Diffusion Policy</span>
+        <span class="chip have">PPO basics</span>
+        <span class="chip have">ROS2 Jazzy</span>
+        <span class="chip have">HRI Voice ROS2 ★</span>
+        <span class="chip have">5–6 GitHub project</span>
+        <span class="chip miss">Production deploy</span>
+        <span class="chip miss">VLA / World Models</span>
+        <span class="chip miss">E2E Audio-LLM</span>
+        <span class="chip miss">Publication</span>
+      </div>
+      <div class="ms-legend">
+        <span><span class="dot-g"></span> Có</span>
+        <span><span class="dot-m"></span> Chưa có</span>
+      </div>
+    </div>
+
+    <!-- Info -->
+    <div class="info-card">
+      <strong>v8.8.x → v8.9.0:</strong> Sub-phase 2C-Audio bổ sung Mel-Spectrogram, Whisper/Wav2Vec architecture, TTS pipeline, Audio Tokens. Phase 5 HRI Voice nâng từ black-box lên integration layer có kiến trúc ROS2. Kết quả: Audio/Speech +45%, VLM/Multimodal +5%, mở khoá HRI / Voice AI Engineer.
+    </div>
+
+    <!-- Jobs -->
+    <div class="section-label">Job market Việt Nam 2025–2026</div>
+
+    <div class="job-section-label">Apply được ngay</div>
+    <div class="job-grid">
+
+      <div class="job-card">
+        <div class="job-card-head">
+          <div class="job-title-text">AI / ML Engineer</div>
+          <span class="job-badge badge-g">Phù hợp nhất</span>
+        </div>
+        <div class="job-co">FPT Software · VNG · MB Bank · Startup AI</div>
+        <div class="job-tags"><span class="jtag">Python</span><span class="jtag">PyTorch</span><span class="jtag">Deep Learning</span></div>
+        <div class="job-salary">20–45 triệu/tháng</div>
+        <div class="job-note">~170 jobs ITviec. Vị trí nhiều nhất tại VN — có cả CV lẫn NLP/LLM là lợi thế lớn.</div>
+      </div>
+
+      <div class="job-card">
+        <div class="job-card-head">
+          <div class="job-title-text">Computer Vision Engineer</div>
+          <span class="job-badge badge-g">Phù hợp nhất</span>
+        </div>
+        <div class="job-co">Aimesoft · Asilla VN · GlobalTech</div>
+        <div class="job-tags"><span class="jtag">OpenCV</span><span class="jtag">YOLO</span><span class="jtag">ViT</span></div>
+        <div class="job-salary">18–40 triệu/tháng</div>
+        <div class="job-note">~94 jobs CareerViet. CS231N vẫn là nền CV vững nhất.</div>
+      </div>
+
+      <div class="job-card">
+        <div class="job-card-head">
+          <div class="job-title-text">NLP / LLM Engineer</div>
+          <span class="job-badge badge-g">Mới — v8</span>
+        </div>
+        <div class="job-co">FPT AI · Zalo AI · Trusting Social</div>
+        <div class="job-tags"><span class="jtag">NLP</span><span class="jtag">LLM</span><span class="jtag">LoRA</span><span class="jtag">Fine-tuning</span></div>
+        <div class="job-salary">22–50 triệu/tháng</div>
+        <div class="job-note">v7: 10%. v8: 72% — Phase 2B mở khoá. ~120 jobs active.</div>
+      </div>
+
+      <div class="job-card">
+        <div class="job-card-head">
+          <div class="job-title-text">VLM / Multimodal Engineer</div>
+          <span class="job-badge badge-g">Mới — v8</span>
+        </div>
+        <div class="job-co">FPT AI · Zalo AI · Product AI</div>
+        <div class="job-tags"><span class="jtag">VLM</span><span class="jtag">CLIP</span><span class="jtag">Multimodal</span></div>
+        <div class="job-salary">25–55 triệu/tháng</div>
+        <div class="job-note">v7: 38%. v8.9: 80% — Phase 2C-VL + 2C-Audio.</div>
+      </div>
+
+      <div class="job-card">
+        <div class="job-card-head">
+          <div class="job-title-text">HRI / Voice AI Engineer</div>
+          <span class="job-badge badge-g">Mới — v8.9 ★</span>
+        </div>
+        <div class="job-co">Startup HRI · Edtech AI · Healthcare robot · Viettel AI</div>
+        <div class="job-tags"><span class="jtag">ASR</span><span class="jtag">TTS</span><span class="jtag">Whisper</span><span class="jtag">ROS2</span></div>
+        <div class="job-salary">22–48 triệu/tháng</div>
+        <div class="job-note">v8.8: 10% (black box). v8.9: 55% — hiểu kiến trúc, build được cascaded voice loop. Còn cần: ASR fine-tune tiếng Việt.</div>
+      </div>
+
+    </div>
+
+    <div class="job-section-label" style="margin-top:1.25rem">Cần bổ sung 1–2 skill</div>
+    <div class="job-grid">
+
+      <div class="job-card">
+        <div class="job-card-head">
+          <div class="job-title-text">AI Research Engineer</div>
+          <span class="job-badge badge-a">Cần thêm</span>
+        </div>
+        <div class="job-co">VinAI · VinBigData · Qualcomm VN</div>
+        <div class="job-salary">25–55 triệu/tháng</div>
+        <div class="job-note">72% match. Cần: paper reproduce portfolio, workshop report (Phase 6–7).</div>
+      </div>
+
+      <div class="job-card">
+        <div class="job-card-head">
+          <div class="job-title-text">Simulation / Robot Learning</div>
+          <span class="job-badge badge-a">Cần thêm</span>
+        </div>
+        <div class="job-co">Robotics startup · FDI autonomous</div>
+        <div class="job-salary">25–50 triệu/tháng</div>
+        <div class="job-note">72% match. Cần: Isaac Sim, physics debugging chuyên sâu.</div>
+      </div>
+
+      <div class="job-card">
+        <div class="job-card-head">
+          <div class="job-title-text">RL / Game AI Engineer</div>
+          <span class="job-badge badge-a">Cần thêm</span>
+        </div>
+        <div class="job-co">Game AI · Simulation platform</div>
+        <div class="job-salary">22–50 triệu/tháng</div>
+        <div class="job-note">60% match. Cần: SAC production, distributed rollout.</div>
+      </div>
+
+    </div>
+
+    <div class="job-section-label" style="margin-top:1.25rem">Chưa đủ điều kiện</div>
+    <div class="job-grid">
+      <div class="job-card">
+        <div class="job-card-head">
+          <div class="job-title-text">Robotics SWE (C++ heavy)</div>
+          <span class="job-badge badge-r">Chưa đủ</span>
+        </div>
+        <div class="job-salary">20–45 triệu/tháng</div>
+        <div class="job-note">35% match. C++ production, SLAM — không phải định hướng Brain-centric.</div>
+      </div>
+      <div class="job-card">
+        <div class="job-card-head">
+          <div class="job-title-text">ML Systems / MLOps</div>
+          <span class="job-badge badge-r">Chưa đủ</span>
+        </div>
+        <div class="job-salary">30–70 triệu/tháng</div>
+        <div class="job-note">25% match. Cần CUDA, Kubernetes, model serving infra — mục tiêu sau 1–2 năm kinh nghiệm.</div>
+      </div>
+    </div>
+
+  </div><!-- /right-col -->
+
+  <!-- ══ SUMMARY TABLE (full width) ══ -->
+  <div class="summary-wrap">
+    <div class="section-label">Bảng tổng hợp — v7 vs v8.8 vs v8.9 · Skill match %</div>
+    <div class="tbl-scroll">
+    <table>
+      <thead>
+        <tr>
+          <th>Vị trí</th>
+          <th>v7</th>
+          <th>v8.8</th>
+          <th>v8.9</th>
+          <th>Δ v8.8→v8.9</th>
+          <th>Skill còn thiếu</th>
+          <th>Lương VN</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>AI / ML Engineer</td><td class="pct-dim">85%</td><td class="pct-dim">90%</td><td class="pct-g">90%</td><td class="delta-n">—</td><td>Production deploy, MLOps</td><td style="font-family:var(--mono);font-size:11px;color:var(--blue)">20–45M</td></tr>
+        <tr><td>Computer Vision Engineer</td><td class="pct-dim">80%</td><td class="pct-dim">80%</td><td class="pct-g">80%</td><td class="delta-n">—</td><td>3D vision, production pipeline</td><td style="font-family:var(--mono);font-size:11px;color:var(--blue)">18–40M</td></tr>
+        <tr><td>NLP / LLM Engineer</td><td class="pct-dim">10%</td><td class="pct-dim">72%</td><td class="pct-g">72%</td><td class="delta-n">—</td><td>RAG production, vLLM serving</td><td style="font-family:var(--mono);font-size:11px;color:var(--blue)">22–50M</td></tr>
+        <tr><td>VLM / Multimodal Engineer</td><td class="pct-dim">38%</td><td class="pct-dim">75%</td><td class="pct-g">80%</td><td class="delta-g">+5%</td><td>E2E Audio-LLM, VLM serving</td><td style="font-family:var(--mono);font-size:11px;color:var(--blue)">25–55M</td></tr>
+        <tr><td>HRI / Voice AI Engineer</td><td class="pct-dim">0%</td><td class="pct-dim">10%</td><td class="pct-a">55%</td><td class="delta-g" style="font-weight:700">+45%</td><td>ASR fine-tune tiếng Việt, E2E</td><td style="font-family:var(--mono);font-size:11px;color:var(--blue)">22–48M</td></tr>
+        <tr><td>AI Research Engineer</td><td class="pct-dim">58%</td><td class="pct-dim">72%</td><td class="pct-a">72%</td><td class="delta-n">—</td><td>Paper reproduce (Phase 6–7)</td><td style="font-family:var(--mono);font-size:11px;color:var(--blue)">25–55M</td></tr>
+        <tr><td>Simulation / Robot Learning</td><td class="pct-dim">65%</td><td class="pct-dim">72%</td><td class="pct-a">72%</td><td class="delta-n">—</td><td>Isaac Sim, physics debugging</td><td style="font-family:var(--mono);font-size:11px;color:var(--blue)">25–50M</td></tr>
+        <tr><td>RL / Game AI Engineer</td><td class="pct-dim">45%</td><td class="pct-dim">60%</td><td class="pct-a">60%</td><td class="delta-n">—</td><td>SAC production, reward engineering</td><td style="font-family:var(--mono);font-size:11px;color:var(--blue)">22–50M</td></tr>
+        <tr><td>AI Edge / Embedded</td><td class="pct-dim">50%</td><td class="pct-dim">50%</td><td class="pct-a">50%</td><td class="delta-n">—</td><td>ONNX, TensorRT, quantization</td><td style="font-family:var(--mono);font-size:11px;color:var(--blue)">22–45M</td></tr>
+        <tr><td>Robotics SWE (C++ heavy)</td><td class="pct-dim">35%</td><td class="pct-dim">35%</td><td class="pct-r">35%</td><td class="delta-n">—</td><td>C++ production, SLAM</td><td style="font-family:var(--mono);font-size:11px;color:var(--blue)">20–45M</td></tr>
+        <tr><td>ML Systems / MLOps</td><td class="pct-dim">25%</td><td class="pct-dim">25%</td><td class="pct-r">25%</td><td class="delta-n">—</td><td>CUDA, Kubernetes, model serving</td><td style="font-family:var(--mono);font-size:11px;color:var(--blue)">30–70M</td></tr>
+      </tbody>
+    </table>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <div class="footer-notes">
+    <div class="warn-bar">
+      <strong>Thay đổi lớn nhất v8.9.0:</strong> Audio/Speech Models +45% (10% → 55%) và HRI / Voice AI Engineer chuyển từ "chưa đủ" sang "apply được ngay" — kết quả trực tiếp của sub-phase 2C-Audio và Phase 5 HRI Voice Pipeline. VLM/Multimodal +5% (75% → 80%). Phù hợp với định hướng Mini-Baymax / Human-Robot Interaction.
+    </div>
+    <div class="note-bar">
+      <strong>Nguồn:</strong> ITviec · TopCV · Glassdoor VN · VietnamWorks. Mức lương junior–mid, không bao gồm senior. FDI thường cao hơn nội địa 20–30%. Snapshot 6/2026 — kiểm chứng lại trước khi apply.
+      <br><strong>Context thời gian:</strong> Các % trên là snapshot tại mốc hoàn thành Phase 0–5 (~22–28 tháng full-time). Học bán thời gian: nhân ~1.7–2 lần.
+    </div>
+  </div>
+
+</div><!-- /main-grid -->
+</div><!-- /shell -->
+
+<script>
+function toggleDetail(id, row) {
+  const el = document.getElementById(id);
+  const isOpen = el.classList.contains('open');
+  // close all
+  document.querySelectorAll('.skill-detail').forEach(d => d.classList.remove('open'));
+  document.querySelectorAll('.skill-row').forEach(r => r.classList.remove('active-row'));
+  if (!isOpen) {
+    el.classList.add('open');
+    row.classList.add('active-row');
+  }
+}
+</script>
+</body>
+</html>

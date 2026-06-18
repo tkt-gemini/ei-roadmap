@@ -1,0 +1,91 @@
+{
+  "schema": "embodied-ai-roadmap-progress",
+  "roadmapVersion": "8.9.0",
+  "savedAt": "2026-06-16T13:10:21.759Z",
+  "completedCount": 10,
+  "totalCount": 204,
+  "completedIds": [
+    "1j8p0bc",
+    "1uc6bbv",
+    "10ys64q",
+    "wzwfh7",
+    "m2gpb4",
+    "8zd75q",
+    "9dhmiu",
+    "ojhjnk",
+    "it1ycq",
+    "1lcrgf2"
+  ],
+  "completedItems": [
+    {
+      "id": "1j8p0bc",
+      "phaseId": "ph0",
+      "phase": "Phase 0 — Setup & Workflow",
+      "category": "Skills",
+      "text": "Linux terminal, shell script cơ bản, file system, permissions"
+    },
+    {
+      "id": "1uc6bbv",
+      "phaseId": "ph0",
+      "phase": "Phase 0 — Setup & Workflow",
+      "category": "Skills",
+      "text": "Git workflow: branch, commit, issue, pull request"
+    },
+    {
+      "id": "10ys64q",
+      "phaseId": "ph0",
+      "phase": "Phase 0 — Setup & Workflow",
+      "category": "Skills",
+      "text": "Python environment: venv/conda, pip, requirements.txt"
+    },
+    {
+      "id": "wzwfh7",
+      "phaseId": "ph0",
+      "phase": "Phase 0 — Setup & Workflow",
+      "category": "Skills",
+      "text": "PyTorch tensor, GPU check, training loop nhỏ"
+    },
+    {
+      "id": "m2gpb4",
+      "phaseId": "ph0",
+      "phase": "Phase 0 — Setup & Workflow",
+      "category": "Skills",
+      "text": "Config file, random seed, checkpoint, logging"
+    },
+    {
+      "id": "8zd75q",
+      "phaseId": "ph0",
+      "phase": "Phase 0 — Setup & Workflow",
+      "category": "Tools",
+      "text": "Ubuntu hoặc WSL2"
+    },
+    {
+      "id": "9dhmiu",
+      "phaseId": "ph0",
+      "phase": "Phase 0 — Setup & Workflow",
+      "category": "Tools",
+      "text": "GitHub"
+    },
+    {
+      "id": "ojhjnk",
+      "phaseId": "ph0",
+      "phase": "Phase 0 — Setup & Workflow",
+      "category": "Tools",
+      "text": "Python 3.11+"
+    },
+    {
+      "id": "it1ycq",
+      "phaseId": "ph0",
+      "phase": "Phase 0 — Setup & Workflow",
+      "category": "Tools",
+      "text": "PyTorch"
+    },
+    {
+      "id": "1lcrgf2",
+      "phaseId": "ph0",
+      "phase": "Phase 0 — Setup & Workflow",
+      "category": "Tools",
+      "text": "TensorBoard hoặc Weights & Biases"
+    }
+  ]
+}
