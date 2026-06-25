@@ -1,8 +1,8 @@
 {
   "schema": "embodied-ai-roadmap-progress",
   "roadmapVersion": "8.9.0",
-  "savedAt": "2026-06-16T13:10:21.759Z",
-  "completedCount": 10,
+  "savedAt": "2026-06-19T18:54:23.428Z",
+  "completedCount": 14,
   "totalCount": 204,
   "completedIds": [
     "1j8p0bc",
@@ -14,7 +14,11 @@
     "9dhmiu",
     "ojhjnk",
     "it1ycq",
-    "1lcrgf2"
+    "1lcrgf2",
+    "zoc6x0",
+    "12mxrxe",
+    "qcervq",
+    "bt977o"
   ],
   "completedItems": [
     {
@@ -86,6 +90,34 @@
       "phase": "Phase 0 — Setup & Workflow",
       "category": "Tools",
       "text": "TensorBoard hoặc Weights & Biases"
+    },
+    {
+      "id": "zoc6x0",
+      "phaseId": "ph0",
+      "phase": "Phase 0 — Setup & Workflow",
+      "category": "Pass Criteria",
+      "text": "Template repo public"
+    },
+    {
+      "id": "12mxrxe",
+      "phaseId": "ph0",
+      "phase": "Phase 0 — Setup & Workflow",
+      "category": "Pass Criteria",
+      "text": "MNIST/CIFAR training loop chạy lại được từ config"
+    },
+    {
+      "id": "qcervq",
+      "phaseId": "ph0",
+      "phase": "Phase 0 — Setup & Workflow",
+      "category": "Pass Criteria",
+      "text": "Checkpoint + log + metric table hoạt động"
+    },
+    {
+      "id": "bt977o",
+      "phaseId": "ph0",
+      "phase": "Phase 0 — Setup & Workflow",
+      "category": "Pass Criteria",
+      "text": "Report template có method, result, ablation, limitation"
     }
   ]
 }
